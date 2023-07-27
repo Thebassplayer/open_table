@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const RestaurantCard = () => {
   return (
@@ -22,7 +23,7 @@ const RestaurantCard = () => {
           </div>
         </div>
         <div className="text-red-600">
-          <a href="">View more information</a>
+          <Link href="/restaurant/milestones">View more information</Link>
         </div>
       </div>
     </div>
