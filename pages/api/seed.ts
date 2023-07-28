@@ -11,13 +11,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  //   await prisma.table.deleteMany();
-  // await prisma.review.deleteMany();
   await prisma.item.deleteMany();
   await prisma.restaurant.deleteMany();
   await prisma.location.deleteMany();
   await prisma.cuissine.deleteMany();
-  // await prisma.user.deleteMany();
 
   await prisma.location.createMany({
     data: [{ name: "ottawa" }, { name: "toronto" }, { name: "niagara" }],
@@ -51,7 +48,7 @@ export default async function handler(
         name: "Vivaan - fine Indian",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/1/32109459.jpg",
-        price: PRICE.MEDIUM,
+        price: PRICE.REGULAR,
         description:
           "Vivaan is Modern Indian Cuisine serving dishes from different regions of India. We carefully select our ingredients and use them to make authentic Indian recipes and our chef puts his modern flair and twists to the dishes.",
         images: [
@@ -108,7 +105,7 @@ export default async function handler(
         name: "Last Train to Delhi",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/26429498.jpg",
-        price: PRICE.MEDIUM,
+        price: PRICE.REGULAR,
         description:
           "Welcome to Last Train to Delhi. We are a progressive Indian restaurant in the beautiful Glebe community in Ottawa. Our speciality is Northern Indian food, classics like Murg Mahkini and some modern dishes like Crispy Shrimp. We are a small cozy restaurant, so make sure that you reserve through OpenTable.",
         images: [
@@ -146,7 +143,7 @@ export default async function handler(
         name: "Curryish Tavern",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/49294128.jpg",
-        price: PRICE.MEDIUM,
+        price: PRICE.REGULAR,
         description:
           "The most unique Indian food in the world! We are inspired by the seasons of Ontario and the cooking techniques of the world. Regale in the imagination of Chef Miheer Shete's dishes and change your palate for life.",
         images: [
@@ -221,7 +218,7 @@ export default async function handler(
         name: "Eldorado Taco",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/2/42557297.jpg",
-        price: PRICE.MEDIUM,
+        price: PRICE.REGULAR,
         description:
           "Eldorado Taco restaurant is excited to serve you traditional Mexican cuissine, re-imagined with a distinct modern flair, in a stylish setting on Preston street. Striving to bring you some of Ottawa’s best Tacos, margaritas and Tequila. Reserve your table now!",
         images: [
@@ -354,7 +351,7 @@ export default async function handler(
         name: "Cano Restaurant",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/2/43463549.jpg",
-        price: PRICE.MEDIUM,
+        price: PRICE.REGULAR,
         description:
           "Our back patio has now officially reopened for FOOD SERVICE only. Drinks can be ordered and consumed at the bar before, during, or after dinner service.",
         images: [
@@ -396,7 +393,7 @@ export default async function handler(
         name: "Stelvio",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/50557365.jpg",
-        price: PRICE.MEDIUM,
+        price: PRICE.REGULAR,
         description:
           "Stelvio on Dundas West is an authentic Italian restaurant serving classic old world fare using traditional recipes and ingredients. Recipes have been fine-tuned to satisfy the palate of the modern guest, and fresh meals are prepared daily.",
         images: [
@@ -416,7 +413,7 @@ export default async function handler(
         name: "Terroni Adelaide",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/46827195.jpg",
-        price: PRICE.MEDIUM,
+        price: PRICE.REGULAR,
         description:
           "Terroni Adelaide’s multi-level location is located in Toronto’s historic York County Court House circa 1853.",
         images: [
@@ -478,7 +475,7 @@ export default async function handler(
         name: "Terroni Sud Forno",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/49463645.png",
-        price: PRICE.MEDIUM,
+        price: PRICE.REGULAR,
         description:
           "Spaccio West, near the Lower Junction on the West Toronto Railpath, acts as the backstage to the main show taking place at all Terroni locations.",
         images: [
