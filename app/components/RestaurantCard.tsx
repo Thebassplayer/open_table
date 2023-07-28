@@ -1,5 +1,9 @@
 import React from "react";
+// Next
 import Link from "next/link";
+// Components
+import Price from "./Price";
+// Types
 import { RestaurantCardType } from "../page";
 
 interface RestaurantCardProps {
@@ -20,7 +24,7 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
           </div>
           <div className="flex text-reg font-light capitalize">
             <p className=" mr-3">{cuissine.name}</p>
-            <p className="mr-3">$$$$</p>
+            <Price price={price} />
             <p>{location.name}</p>
           </div>
           <p className="text-sm mt-1 font-bold">Booked 3 times today</p>

@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Price, PrismaClient } from "@prisma/client";
+import { PRICE, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 type Data = {
@@ -51,7 +51,7 @@ export default async function handler(
         name: "Vivaan - fine Indian",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/1/32109459.jpg",
-        price: Price.MEDIUM,
+        price: PRICE.MEDIUM,
         description:
           "Vivaan is Modern Indian Cuisine serving dishes from different regions of India. We carefully select our ingredients and use them to make authentic Indian recipes and our chef puts his modern flair and twists to the dishes.",
         images: [
@@ -70,7 +70,7 @@ export default async function handler(
         name: "RamaKrishna Indian",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/2/47417441.jpg",
-        price: Price.CHEAP,
+        price: PRICE.CHEAP,
         description:
           "With 20 years of experience cooking in the finest restaurants, our chef is excited to present their vision to you and all our guests. Our caring and committed staff will ensure you have a fantastic experience with us.",
         images: [
@@ -89,7 +89,7 @@ export default async function handler(
         name: "Coconut Lagoon",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/48545745.jpg",
-        price: Price.EXPENSIVE,
+        price: PRICE.EXPENSIVE,
         description:
           "At Coconut Lagoon prepare yourselves for a most memorable journey through South Indian cuissine and feast on high quality food of inimitable flavour, aroma and originality in the vibrant setting of Coconut Lagoon.",
         images: [
@@ -108,7 +108,7 @@ export default async function handler(
         name: "Last Train to Delhi",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/26429498.jpg",
-        price: Price.MEDIUM,
+        price: PRICE.MEDIUM,
         description:
           "Welcome to Last Train to Delhi. We are a progressive Indian restaurant in the beautiful Glebe community in Ottawa. Our speciality is Northern Indian food, classics like Murg Mahkini and some modern dishes like Crispy Shrimp. We are a small cozy restaurant, so make sure that you reserve through OpenTable.",
         images: [
@@ -127,7 +127,7 @@ export default async function handler(
         name: "Adrak Yorkville",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/4/47914200.jpg",
-        price: Price.EXPENSIVE,
+        price: PRICE.EXPENSIVE,
         description:
           "Namaste and welcome to Adrak - a place where food unites all. We take you through a journey of the past and present, as we hope to encourage thought-provoking conversations amid elevated Indian food.",
         images: [
@@ -146,7 +146,7 @@ export default async function handler(
         name: "Curryish Tavern",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/49294128.jpg",
-        price: Price.MEDIUM,
+        price: PRICE.MEDIUM,
         description:
           "The most unique Indian food in the world! We are inspired by the seasons of Ontario and the cooking techniques of the world. Regale in the imagination of Chef Miheer Shete's dishes and change your palate for life.",
         images: [
@@ -165,7 +165,7 @@ export default async function handler(
         name: "Utsav",
         main_image:
           "https://resizer.otstatic.com/v2/photos/xlarge/1/26646742.jpg",
-        price: Price.CHEAP,
+        price: PRICE.CHEAP,
         description:
           "Utsav is an ancient Sanskrit word meaning festival. An integral part of Indian culture, Indian festivals are innumerable and equally varied in origin from the Himalayan foothills to the Peninsula's tip and food plays a very prominent part of the festive events.",
         images: [
@@ -182,7 +182,7 @@ export default async function handler(
         name: "Pukka",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/1/25733300.jpg",
-        price: Price.EXPENSIVE,
+        price: PRICE.EXPENSIVE,
         description:
           "At this refined, yet casual, Indian restaurant, the portions are large, the wine list is top-notch, and the ambience encourages sharing.",
         images: [
@@ -201,7 +201,7 @@ export default async function handler(
         name: "Kamasutra Indian",
         main_image:
           "https://resizer.otstatic.com/v2/photos/xlarge/1/25602522.jpg",
-        price: Price.CHEAP,
+        price: PRICE.CHEAP,
         description:
           "This elegant fine dining Indian Restaurant has been satisfying the Indian tandoori and curry cravings for 12 years in Toronto.",
         images: [
@@ -221,7 +221,7 @@ export default async function handler(
         name: "Eldorado Taco",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/2/42557297.jpg",
-        price: Price.MEDIUM,
+        price: PRICE.MEDIUM,
         description:
           "Eldorado Taco restaurant is excited to serve you traditional Mexican cuissine, re-imagined with a distinct modern flair, in a stylish setting on Preston street. Striving to bring you some of Ottawa’s best Tacos, margaritas and Tequila. Reserve your table now!",
         images: [
@@ -240,7 +240,7 @@ export default async function handler(
         name: "La Bartola",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/2/48981502.jpg",
-        price: Price.EXPENSIVE,
+        price: PRICE.EXPENSIVE,
         description:
           "At La Bartola, we inspire a passion for authentic Mexican flavours. We use simple, fresh, and high-quality local & Mexican ingredients to craft delicious and thoughtful food.",
         images: [
@@ -261,7 +261,7 @@ export default async function handler(
         name: "El Catrin",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/2/28028883.png",
-        price: Price.CHEAP,
+        price: PRICE.CHEAP,
         description:
           "Reservations are booked for indoors only. Seating time will be limited to two hours maximum.",
         images: [
@@ -280,7 +280,7 @@ export default async function handler(
         name: "3 Mariachis",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/2/32449465.jpg",
-        price: Price.CHEAP,
+        price: PRICE.CHEAP,
         description:
           "Specializing in the preparation of high quality Mexican food. Our vibrant décor, carefully selected menu, great staff and exciting entertainment will ensure that you are treated to a unique dining experience.",
         images: [
@@ -299,7 +299,7 @@ export default async function handler(
         name: "Casa Madera",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/47744844.jpg",
-        price: Price.EXPENSIVE,
+        price: PRICE.EXPENSIVE,
         description:
           "The first location in Canada, from famed restauranteurs Noble 33, welcomes patrons into an immersive dining experience.",
         images: [
@@ -319,7 +319,7 @@ export default async function handler(
         name: "Taco N Tequila",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/47429858.jpg",
-        price: Price.CHEAP,
+        price: PRICE.CHEAP,
         description:
           "As a family owned business, our goal is simple: to consistently deliver fresh and delicious Mexican flavours in a FUN and friendly atmosphere with the best service around!",
         images: [
@@ -339,7 +339,7 @@ export default async function handler(
         name: "El Jefe",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/47710768.jpg",
-        price: Price.CHEAP,
+        price: PRICE.CHEAP,
         description:
           "Lively cantina serving Mexican favorites & potent margaritas in a vibrant, airy space with murals.",
         images: [],
@@ -354,7 +354,7 @@ export default async function handler(
         name: "Cano Restaurant",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/2/43463549.jpg",
-        price: Price.MEDIUM,
+        price: PRICE.MEDIUM,
         description:
           "Our back patio has now officially reopened for FOOD SERVICE only. Drinks can be ordered and consumed at the bar before, during, or after dinner service.",
         images: [
@@ -375,7 +375,7 @@ export default async function handler(
         name: "Blu Ristorante",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/2/47350167.jpg",
-        price: Price.EXPENSIVE,
+        price: PRICE.EXPENSIVE,
         description:
           "Victorian Building with two floors of dining space and large side and front patio. Tastefully designed to host your special event, romantic dinner, corporate buyout or a celebration of any sort.",
         images: [
@@ -396,7 +396,7 @@ export default async function handler(
         name: "Stelvio",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/50557365.jpg",
-        price: Price.MEDIUM,
+        price: PRICE.MEDIUM,
         description:
           "Stelvio on Dundas West is an authentic Italian restaurant serving classic old world fare using traditional recipes and ingredients. Recipes have been fine-tuned to satisfy the palate of the modern guest, and fresh meals are prepared daily.",
         images: [
@@ -416,7 +416,7 @@ export default async function handler(
         name: "Terroni Adelaide",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/46827195.jpg",
-        price: Price.MEDIUM,
+        price: PRICE.MEDIUM,
         description:
           "Terroni Adelaide’s multi-level location is located in Toronto’s historic York County Court House circa 1853.",
         images: [
@@ -436,7 +436,7 @@ export default async function handler(
         name: "EST Restaurant",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/49169798.jpg",
-        price: Price.CHEAP,
+        price: PRICE.CHEAP,
         description:
           "ēst is a modern, newly reopened restaurant serving Italian-French courses, captivating cocktails and wine.",
         images: [
@@ -458,7 +458,7 @@ export default async function handler(
         name: "Sofia",
         main_image:
           "https://resizer.otstatic.com/v2/photos/xlarge/1/25558850.jpg",
-        price: Price.EXPENSIVE,
+        price: PRICE.EXPENSIVE,
         description:
           "Tapping into true Italian tastes, the menu starts with a selection of antipasti including a citrus salad and grilled octopus, and a plentiful selection of crudo. ",
         images: [
@@ -478,7 +478,7 @@ export default async function handler(
         name: "Terroni Sud Forno",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/49463645.png",
-        price: Price.MEDIUM,
+        price: PRICE.MEDIUM,
         description:
           "Spaccio West, near the Lower Junction on the West Toronto Railpath, acts as the backstage to the main show taking place at all Terroni locations.",
         images: [
@@ -498,7 +498,7 @@ export default async function handler(
         name: "il Padrino",
         main_image:
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/49616181.jpg",
-        price: Price.CHEAP,
+        price: PRICE.CHEAP,
         description:
           "Welcome to the newest edition to College street iL PADRINO Ristorante has joined the list of Italian restaurants where Chef Connie award winning Italian Chef makes every Italian dish with love like no other. ",
         images: [
@@ -1280,7 +1280,7 @@ export default async function handler(
   //       {
   //         first_name: "Cassidy",
   //         last_name: "Mancher",
-  //         text: "Food was served cold. Major No No. Fantastic Dessert. Service was good. Heavy Rock music should be toned down. Price vs Quality… not great.",
+  //         text: "Food was served cold. Major No No. Fantastic Dessert. Service was good. Heavy Rock music should be toned down. PRICE vs Quality… not great.",
   //         rating: 3,
   //         restaurant_id: laBartolaId,
   //         user_id: userCassidy.id,

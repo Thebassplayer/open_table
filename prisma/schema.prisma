@@ -19,7 +19,7 @@ model Restaurant {
   open_time    String
   close_time   String
   slug        String    @unique
-  price       Price
+  price       PRICE
   items      Item[]
   location_id    Int
   location    Location  @relation(fields: [location_id], references: [id])
@@ -56,8 +56,8 @@ model Cuissine {
   updatedAt   DateTime  @updatedAt
 }
 
-enum Price {
+enum PRICE {
   CHEAP
-  MEDIUM
+  REGULAR
   EXPENSIVE
 }
