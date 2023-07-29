@@ -14,7 +14,7 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
   const { name, main_image, cuissine, location, price, slug } = restaurant;
   return (
     <div className="w-64 h-72 m-3 rounded overflow-hidden border cursor-pointer">
-      <Link href={`/restaurant/milestone-grill${slug}`}>
+      <Link href={`/restaurant/${slug}`}>
         <img src={main_image} alt="" className="w-full h-36" />
         <div className="p-1">
           <h3 className="font-bold text-2xl mb-2">{name}</h3>

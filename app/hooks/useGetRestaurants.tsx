@@ -6,12 +6,13 @@
 //   restaurants: RestaurantCardType[];
 // }
 
+// const prisma = new PrismaClient();
+
 // const useGetRestaurants = (): UseGetRestaurants => {
-//   const prisma = new PrismaClient();
 //   const [restaurants, setRestaurants] = useState<RestaurantCardType[]>([]);
 
-//   useEffect(async () => {
-//     const getRestaurants = async (): Promise<RestaurantCardType[]> => {
+//   useEffect(() => {
+//     const getRestaurants = async (): Promise<void> => {
 //       const restaurants = await prisma.restaurant.findMany({
 //         select: {
 //           id: true,
@@ -23,16 +24,13 @@
 //           slug: true,
 //         },
 //       });
-//       return restaurants;
+//       setRestaurants(restaurants);
 //     };
-//     const restaurantsArray = await getRestaurants();
 
-//     setRestaurants(restaurantsArray);
+//     getRestaurants();
 //   }, []);
 
-//   return {
-//     restaurants,
-//   };
+//   return { restaurants };
 // };
 
 // export default useGetRestaurants;
