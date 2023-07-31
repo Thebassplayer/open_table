@@ -42,7 +42,6 @@ const RestaurantDetails = async ({ params }: { params: { slug: string } }) => {
 
   const restaurant = await getRestaurantBySlug(slug);
   const { name, images, description } = restaurant;
-  console.log({ restaurant });
 
   return (
     <>
