@@ -16,7 +16,6 @@ const getRestaurantMenu = async (slug: string): Promise<Item[] | null> => {
   if (!restaurant) {
     return null;
   }
-  console.log(restaurant.items);
   return restaurant.items;
 };
 

@@ -1,8 +1,18 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const SearchBar = () => {
   const [location, setLocation] = useState("");
+  const router = useRouter();
+
+  const handleClick = () => {
+    if (location === "") return;
+    const path = location.toString().toLocaleLowerCase().trim();
+    router.push(`/search?location=${path}`);
+    setLocation("");
+  };
+
   return (
     <div className="text-left text-lg py-3 m-auto flex justify-center">
       <input
@@ -12,7 +22,10 @@ const SearchBar = () => {
         value={location}
         onChange={e => setLocation(e.target.value)}
       />
-      <button className="rounded bg-red-600 px-9 py-2 text-white">
+      <button
+        className="rounded bg-red-600 px-9 py-2 text-white"
+        onClick={handleClick}
+      >
         Let's go
       </button>
     </div>
