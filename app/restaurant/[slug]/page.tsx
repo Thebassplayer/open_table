@@ -7,9 +7,7 @@ import Reviews from "./components/Reviews";
 import Rating from "./components/Rating";
 import Reservation from "./components/Reservation";
 // Prisma
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/app/lib/prisma";
 
 interface Restaurant {
   id: number;

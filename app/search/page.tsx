@@ -1,16 +1,11 @@
 {
 }
 import React from "react";
-//Next
-import { useSearchParams } from "next/navigation";
 // Components
-import NavBar from "@/app/components/NavBar";
 import Headers from "@/app/search/components/Headers";
 import SearchSideBar from "@/app/search/components/SearchSideBar";
 import RestaurantCard from "@/app/components/RestaurantCard";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/app/lib/prisma";
 
 const getRestaurantsAtCity = (location: string | undefined) => {
   const select = {
