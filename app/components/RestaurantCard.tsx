@@ -14,21 +14,27 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
   const { name, main_image, cuissine, location, price, slug } = restaurant;
   return (
     <div className="border-b flex pb-5 ml-4">
-      <img src={main_image} alt="" className="w-44 h-36 rounded" />
+      <img
+        src={main_image}
+        alt="Restaurant Image"
+        className="w-44 h-36 rounded"
+      />
       <div className="pl-5">
-        <h2 className="text-3xs">{name}</h2>
+        <h2 className="text-3xl">{name}</h2>
         <div className="flex items-start">
           <div className="flex mb-2">*****</div>
           <p className="ml-2 text-sm">77 reviews</p>
         </div>
-        <div className="flex text-reg font-light">
-          <Price price={price} />
-          <p className="mr-4 capitalize">{cuissine.name}</p>
-          <p className="mr-4 capitalize">{location.name}</p>
+        <div className="mb-9">
+          <div className="flex text-reg font-light">
+            <Price price={price} />
+            <p className="mr-4 capitalize">{cuissine.name}</p>
+            <p className="mr-4 capitalize">{location.name}</p>
+          </div>
         </div>
-      </div>
-      <div className="text-red-600">
-        <Link href={`/restaurants/${slug}`}>View more information</Link>
+        <div className="text-red-600">
+          <Link href={`/restaurant/${slug}`}>View more information</Link>
+        </div>
       </div>
     </div>
   );
