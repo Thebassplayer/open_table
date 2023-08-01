@@ -27,7 +27,7 @@ const SearchBar = () => {
         placeholder="State, city or town"
         value={location}
         onChange={e => setLocation(e.target.value)}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyPress}
       />
       <button
         className="rounded bg-red-600 px-9 py-2 text-white"
