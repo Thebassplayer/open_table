@@ -6,11 +6,17 @@ const SearchBar = () => {
   const [location, setLocation] = useState("");
   const router = useRouter();
 
-  const handleClick = () => {
+  const handleSearch = () => {
     if (location === "") return;
     const path = location.toString().toLocaleLowerCase().trim();
     router.push(`/search?location=${path}`);
     setLocation("");
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
@@ -21,10 +27,11 @@ const SearchBar = () => {
         placeholder="State, city or town"
         value={location}
         onChange={e => setLocation(e.target.value)}
+        onKeyPress={handleKeyPress}
       />
       <button
         className="rounded bg-red-600 px-9 py-2 text-white"
-        onClick={handleClick}
+        onClick={handleSearch}
       >
         Let's go
       </button>
