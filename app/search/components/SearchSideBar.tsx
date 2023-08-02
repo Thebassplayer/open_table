@@ -13,6 +13,27 @@ const SearchSideBar = ({
   cuissines,
   searchParams,
 }: SearchSideBarProps) => {
+  const prices = [
+    {
+      price: PRICE.CHEAP,
+      value: "$",
+      path: "/search",
+      query: { ...searchParams, price: PRICE.CHEAP },
+    },
+    {
+      price: PRICE.REGULAR,
+      value: "$$",
+      path: "/search",
+      query: { ...searchParams, price: PRICE.REGULAR },
+    },
+    {
+      price: PRICE.EXPENSIVE,
+      value: "$$$",
+      path: "/search",
+      query: { ...searchParams, price: PRICE.EXPENSIVE },
+    },
+  ];
+
   return (
     <div className="w-1/5">
       <div className="border-b pb-4 flex flex-col">
@@ -54,33 +75,17 @@ const SearchSideBar = ({
       <div className="mt-3 pb-4">
         <h1 className="mb-2">Price</h1>
         <div className="flex">
-          <Link
-            className="border w-full text-reg font-light rounded-l p-2"
-            href={{
-              pathname: "/search",
-              query: { ...searchParams, price: PRICE.CHEAP },
-            }}
-          >
-            $
-          </Link>
-          <Link
-            className="border-r border-t border-b w-full text-reg font-light p-2"
-            href={{
-              pathname: "/search",
-              query: { ...searchParams, price: PRICE.REGULAR },
-            }}
-          >
-            $$
-          </Link>
-          <Link
-            className="border-r border-t border-b w-full text-reg font-light p-2 rounded-r"
-            href={{
-              pathname: "/search",
-              query: { ...searchParams, price: PRICE.EXPENSIVE },
-            }}
-          >
-            $$$
-          </Link>
+          {prices.map(({ value, path, query }) => (
+            <Link
+              className="border w-full text-reg font-light p-2 text-center"
+              href={{
+                pathname: path,
+                query,
+              }}
+            >
+              {value}
+            </Link>
+          ))}
         </div>
       </div>
     </div>

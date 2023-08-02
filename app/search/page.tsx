@@ -8,7 +8,13 @@ import RestaurantCard from "@/app/components/RestaurantCard";
 import { prisma } from "@/app/lib/prisma";
 import { PRICE } from "@prisma/client";
 
-const getRestaurantsAtCity = (location: string | undefined) => {
+interface searchParams {
+  location: string | undefined;
+  cuissine: string | undefined;
+  price: PRICE | undefined;
+}
+
+const getFilteredRestaurants = (searchParams: searchParams) => {
   const select = {
     id: true,
     name: true,
@@ -18,17 +24,46 @@ const getRestaurantsAtCity = (location: string | undefined) => {
     cuissine: true,
     location: true,
   };
-  if (!location) {
-    return prisma.restaurant.findMany({ select });
-  }
-  return prisma.restaurant.findMany({
-    where: {
-      location: {
-        name: {
-          equals: location,
-        },
+  const where: {
+    location?: {
+      name: {
+        equals: string | undefined;
+      };
+    };
+    cuissine?: {
+      name: {
+        equals: string | undefined;
+      };
+    };
+    price?: {
+      equals: PRICE | undefined;
+    };
+  } = {};
+
+  if (searchParams.location) {
+    const location = {
+      name: {
+        equals: searchParams.location,
       },
-    },
+    };
+    where.location = location;
+  }
+  if (searchParams.cuissine) {
+    const cuissine = {
+      name: {
+        equals: searchParams.cuissine,
+      },
+    };
+    where.cuissine = cuissine;
+  }
+  if (searchParams.price) {
+    where.price = {
+      equals: searchParams.price,
+    };
+  }
+
+  return prisma.restaurant.findMany({
+    where,
     select,
   });
 };
@@ -40,15 +75,10 @@ const getCuissines = async () => {
   return prisma.cuissine.findMany();
 };
 
-const Search = async ({
-  searchParams,
-}: {
-  searchParams: { location?: string; cuissine?: string; price?: PRICE };
-}) => {
+const Search = async ({ searchParams }: { searchParams: searchParams }) => {
   if (!searchParams) return null;
-  const { location } = searchParams;
 
-  const restaurants = await getRestaurantsAtCity(location);
+  const restaurants = await getFilteredRestaurants(searchParams);
 
   const locations = await getLocations();
 
@@ -66,7 +96,8 @@ const Search = async ({
         <div className="w-5/6">
           {!restaurants.length ? (
             <div className="text-2xl font-bold mt-4 mb-2">
-              Sorry, there is no restaurant registered in {location}
+              Sorry, there is no restaurant registered in{" "}
+              {searchParams.location}
             </div>
           ) : (
             restaurants.map(restaurant => (
