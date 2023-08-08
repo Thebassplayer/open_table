@@ -11,30 +11,33 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  // Delet all data
   await prisma.review.deleteMany();
   await prisma.item.deleteMany();
   await prisma.restaurant.deleteMany();
   await prisma.location.deleteMany();
-  await prisma.cuissine.deleteMany();
+  await prisma.cuisine.deleteMany();
   await prisma.user.deleteMany();
 
+  // Create Cities
   await prisma.location.createMany({
     data: [{ name: "ottawa" }, { name: "toronto" }, { name: "niagara" }],
   });
 
-  await prisma.cuissine.createMany({
+  // Create Cuisines
+  await prisma.cuisine.createMany({
     data: [{ name: "indian" }, { name: "italian" }, { name: "mexican" }],
   });
 
   const locations = await prisma.location.findMany();
-  const cuissines = await prisma.cuissine.findMany();
+  const cuisines = await prisma.cuisine.findMany();
 
   const indianCuisineId =
-    cuissines.find(cuissine => cuissine.name === "indian")?.id || 1;
+    cuisines.find(cuisine => cuisine.name === "indian")?.id || 1;
   const mexicanCuisineId =
-    cuissines.find(cuissine => cuissine.name === "mexican")?.id || 1;
+    cuisines.find(cuisine => cuisine.name === "mexican")?.id || 1;
   const italianCuisineId =
-    cuissines.find(cuissine => cuissine.name === "italian")?.id || 1;
+    cuisines.find(cuisine => cuisine.name === "italian")?.id || 1;
 
   const ottawaLocationId =
     locations.find(location => location.name === "ottawa")?.id || 1;
@@ -61,9 +64,9 @@ export default async function handler(
         ],
         open_time: "14:30:00.000Z",
         close_time: "21:30:00.000Z",
-        slug: "vivaan-fine-indian-cuissine-ottawa",
+        slug: "vivaan-fine-indian-cuisine-ottawa",
         location_id: ottawaLocationId,
-        cuissine_id: indianCuisineId,
+        cuisine_id: indianCuisineId,
       },
       {
         name: "RamaKrishna Indian",
@@ -82,7 +85,7 @@ export default async function handler(
         close_time: "22:00:00.000Z",
         slug: "ramakrishna-indian-restaurant-ottawa",
         location_id: ottawaLocationId,
-        cuissine_id: indianCuisineId,
+        cuisine_id: indianCuisineId,
       },
       {
         name: "Coconut Lagoon",
@@ -90,7 +93,7 @@ export default async function handler(
           "https://resizer.otstatic.com/v2/photos/wide-huge/3/48545745.jpg",
         price: PRICE.EXPENSIVE,
         description:
-          "At Coconut Lagoon prepare yourselves for a most memorable journey through South Indian cuissine and feast on high quality food of inimitable flavour, aroma and originality in the vibrant setting of Coconut Lagoon.",
+          "At Coconut Lagoon prepare yourselves for a most memorable journey through South Indian cuisine and feast on high quality food of inimitable flavour, aroma and originality in the vibrant setting of Coconut Lagoon.",
         images: [
           "https://resizer.otstatic.com/v2/photos/xlarge/1/30045353.jpg",
           "https://resizer.otstatic.com/v2/photos/xlarge/2/48545766.jpg",
@@ -101,7 +104,7 @@ export default async function handler(
         close_time: "22:00:00.000Z",
         slug: "coconut-lagoon-ottawa",
         location_id: ottawaLocationId,
-        cuissine_id: indianCuisineId,
+        cuisine_id: indianCuisineId,
       },
       {
         name: "Last Train to Delhi",
@@ -120,7 +123,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "last-train-to-delhi-ottawa",
         location_id: ottawaLocationId,
-        cuissine_id: indianCuisineId,
+        cuisine_id: indianCuisineId,
       },
       {
         name: "Adrak Yorkville",
@@ -139,7 +142,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "adrak-yorkville-toronto",
         location_id: torontoLocationId,
-        cuissine_id: indianCuisineId,
+        cuisine_id: indianCuisineId,
       },
       {
         name: "Curryish Tavern",
@@ -158,7 +161,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "curryish-tavern-toronto",
         location_id: torontoLocationId,
-        cuissine_id: indianCuisineId,
+        cuisine_id: indianCuisineId,
       },
       {
         name: "Utsav",
@@ -175,7 +178,7 @@ export default async function handler(
         close_time: "19:00:00.000Z",
         slug: "utsav-toronto",
         location_id: torontoLocationId,
-        cuissine_id: indianCuisineId,
+        cuisine_id: indianCuisineId,
       },
       {
         name: "Pukka",
@@ -194,7 +197,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "pukka-niagara",
         location_id: niagaraLocationId,
-        cuissine_id: indianCuisineId,
+        cuisine_id: indianCuisineId,
       },
       {
         name: "Kamasutra Indian",
@@ -213,7 +216,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "kamasutra-indian-restaurant-and-wine-bar-niagara",
         location_id: niagaraLocationId,
-        cuissine_id: indianCuisineId,
+        cuisine_id: indianCuisineId,
       },
       // MEXICAN //
       {
@@ -222,7 +225,7 @@ export default async function handler(
           "https://resizer.otstatic.com/v2/photos/wide-huge/2/42557297.jpg",
         price: PRICE.REGULAR,
         description:
-          "Eldorado Taco restaurant is excited to serve you traditional Mexican cuissine, re-imagined with a distinct modern flair, in a stylish setting on Preston street. Striving to bring you some of Ottawa’s best Tacos, margaritas and Tequila. Reserve your table now!",
+          "Eldorado Taco restaurant is excited to serve you traditional Mexican cuisine, re-imagined with a distinct modern flair, in a stylish setting on Preston street. Striving to bring you some of Ottawa’s best Tacos, margaritas and Tequila. Reserve your table now!",
         images: [
           "https://resizer.otstatic.com/v2/photos/xlarge/1/29501707.jpg",
           "https://resizer.otstatic.com/v2/photos/xlarge/1/29501713.jpg",
@@ -233,7 +236,7 @@ export default async function handler(
         close_time: "19:00:00.000Z",
         slug: "eldorado-taco-ottawa",
         location_id: ottawaLocationId,
-        cuissine_id: mexicanCuisineId,
+        cuisine_id: mexicanCuisineId,
       },
       {
         name: "La Bartola",
@@ -254,7 +257,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "la-bartola-ottawa",
         location_id: ottawaLocationId,
-        cuissine_id: mexicanCuisineId,
+        cuisine_id: mexicanCuisineId,
       },
       {
         name: "El Catrin",
@@ -273,7 +276,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "el-catrin-ottawa",
         location_id: ottawaLocationId,
-        cuissine_id: mexicanCuisineId,
+        cuisine_id: mexicanCuisineId,
       },
       {
         name: "3 Mariachis",
@@ -292,7 +295,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "el-catrin-toronto",
         location_id: torontoLocationId,
-        cuissine_id: mexicanCuisineId,
+        cuisine_id: mexicanCuisineId,
       },
       {
         name: "Casa Madera",
@@ -312,7 +315,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "casa-madera-toronto",
         location_id: torontoLocationId,
-        cuissine_id: mexicanCuisineId,
+        cuisine_id: mexicanCuisineId,
       },
       {
         name: "Taco N Tequila",
@@ -332,7 +335,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "casa-madera-niagara",
         location_id: niagaraLocationId,
-        cuissine_id: mexicanCuisineId,
+        cuisine_id: mexicanCuisineId,
       },
       {
         name: "El Jefe",
@@ -346,7 +349,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "el-jefe-niagara",
         location_id: niagaraLocationId,
-        cuissine_id: mexicanCuisineId,
+        cuisine_id: mexicanCuisineId,
       },
       // ITALIAN //
       {
@@ -368,7 +371,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "cano-restaurant-ottawa",
         location_id: ottawaLocationId,
-        cuissine_id: italianCuisineId,
+        cuisine_id: italianCuisineId,
       },
       {
         name: "Blu Ristorante",
@@ -389,7 +392,7 @@ export default async function handler(
         close_time: "22:00:00.000Z",
         slug: "blu-ristorante-ottawa",
         location_id: ottawaLocationId,
-        cuissine_id: italianCuisineId,
+        cuisine_id: italianCuisineId,
       },
       {
         name: "Stelvio",
@@ -409,7 +412,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "stelvio-ottawa",
         location_id: ottawaLocationId,
-        cuissine_id: italianCuisineId,
+        cuisine_id: italianCuisineId,
       },
       {
         name: "Terroni Adelaide",
@@ -429,7 +432,7 @@ export default async function handler(
         close_time: "18:00:00.000Z",
         slug: "terroni-adelaide-niagara",
         location_id: niagaraLocationId,
-        cuissine_id: italianCuisineId,
+        cuisine_id: italianCuisineId,
       },
       {
         name: "EST Restaurant",
@@ -451,7 +454,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "est-restaurant-niagara",
         location_id: niagaraLocationId,
-        cuissine_id: italianCuisineId,
+        cuisine_id: italianCuisineId,
       },
       {
         name: "Sofia",
@@ -471,7 +474,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "sofia-toronto",
         location_id: torontoLocationId,
-        cuissine_id: italianCuisineId,
+        cuisine_id: italianCuisineId,
       },
       {
         name: "Terroni Sud Forno",
@@ -491,7 +494,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "terroni-sud-forno-produzione-e-spaccio-toronto",
         location_id: torontoLocationId,
-        cuissine_id: italianCuisineId,
+        cuisine_id: italianCuisineId,
       },
       {
         name: "il Padrino",
@@ -511,7 +514,7 @@ export default async function handler(
         close_time: "21:00:00.000Z",
         slug: "il-padrino-toronto",
         location_id: torontoLocationId,
-        cuissine_id: italianCuisineId,
+        cuisine_id: italianCuisineId,
       },
     ],
   });

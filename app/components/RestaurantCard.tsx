@@ -11,7 +11,7 @@ interface RestaurantCardProps {
 }
 
 const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
-  const { name, main_image, cuissine, location, price, slug } = restaurant;
+  const { name, main_image, cuisine, location, price, slug } = restaurant;
   return (
     <div className="border-b flex pb-5 ml-4">
       <img
@@ -28,7 +28,7 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
         <div className="mb-9">
           <div className="flex text-reg font-light">
             <Price price={price} />
-            <p className="mr-4 capitalize">{cuissine.name}</p>
+            <p className="mr-4 capitalize">{cuisine.name}</p>
             <p className="mr-4 capitalize">{location.name}</p>
           </div>
         </div>

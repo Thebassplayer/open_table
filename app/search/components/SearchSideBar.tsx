@@ -1,16 +1,16 @@
-import { Cuissine, Location, PRICE } from "@prisma/client";
+import { Cuisine, Location, PRICE } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
 
 interface SearchSideBarProps {
-  locations: Location[];
-  cuissines: Cuissine[];
-  searchParams: { location?: string; cuissine?: string; price?: PRICE };
+  restaurantsLocation: Location[];
+  cuisines: Cuisine[];
+  searchParams: { location?: string; cuisine?: string; price?: PRICE };
 }
 
 const SearchSideBar = ({
-  locations,
-  cuissines,
+  restaurantsLocation,
+  cuisines,
   searchParams,
 }: SearchSideBarProps) => {
   const prices = [
@@ -38,7 +38,7 @@ const SearchSideBar = ({
     <div className="w-1/5">
       <div className="border-b pb-4 flex flex-col">
         <h1 className="mb-2">Region</h1>
-        {locations.map(location => {
+        {restaurantsLocation.map(location => {
           const { name, id } = location;
           return (
             <Link
@@ -56,13 +56,13 @@ const SearchSideBar = ({
       </div>
       <div className="border-b pb-4 mt-3 flex flex-col">
         <h1 className="mb-2">Cuisine</h1>
-        {cuissines.map(cuissine => {
-          const { name, id } = cuissine;
+        {cuisines.map(cuisine => {
+          const { name, id } = cuisine;
           return (
             <Link
               href={{
                 pathname: "/search",
-                query: { ...searchParams, cuissine: name },
+                query: { ...searchParams, cuisine: name },
               }}
             >
               <p key={id} className="font-light text-reg capitalize">

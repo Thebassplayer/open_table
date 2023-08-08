@@ -18,7 +18,7 @@
 //           id: true,
 //           name: true,
 //           main_image: true,
-//           cuissine: true,
+//           cuisine: true,
 //           location: true,
 //           price: true,
 //           slug: true,
