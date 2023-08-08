@@ -11,7 +11,21 @@ interface RestaurantCardProps {
 }
 
 const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
-  const { name, main_image, cuisine, location, price, slug } = restaurant;
+  const { name, main_image, cuisine, location, price, slug, reviews } =
+    restaurant;
+
+  let reviewText: string = "";
+
+  switch (reviews.length) {
+    case 0:
+      reviewText = "No reviews";
+      break;
+    case 1:
+      reviewText = "1 review";
+      break;
+    default:
+      reviewText = `${reviews.length} reviews`;
+  }
   return (
     <div className="border-b flex pb-5 ml-4">
       <img
@@ -23,7 +37,7 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
         <h2 className="text-3xl">{name}</h2>
         <div className="flex items-start">
           <div className="flex mb-2">*****</div>
-          <p className="ml-2 text-sm">77 reviews</p>
+          <p className="ml-2 text-sm">{reviewText}</p>
         </div>
         <div className="mb-9">
           <div className="flex text-reg font-light">

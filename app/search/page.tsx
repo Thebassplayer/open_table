@@ -4,14 +4,14 @@ import React from "react";
 // Components
 import Headers from "@/app/search/components/Headers";
 import SearchSideBar from "@/app/search/components/SearchSideBar";
-import RestaurantCard from "@/app/components/RestaurantCard";
+import RestaurantCard from "@/app/search/components/RestaurantCard";
 import { prisma } from "@/app/lib/prisma";
 import { PRICE } from "@prisma/client";
 
 interface searchParams {
-  location: string | undefined;
-  cuisine: string | undefined;
-  price: PRICE | undefined;
+  location?: string | undefined;
+  cuisine?: string | undefined;
+  price?: PRICE | undefined;
 }
 
 const getFilteredRestaurants = (searchParams: searchParams) => {
@@ -23,6 +23,7 @@ const getFilteredRestaurants = (searchParams: searchParams) => {
     slug: true,
     cuisine: true,
     location: true,
+    reviews: true,
   };
   const where: {
     location?: {
@@ -43,7 +44,7 @@ const getFilteredRestaurants = (searchParams: searchParams) => {
   if (searchParams.location) {
     const location = {
       name: {
-        equals: searchParams.location,
+        equals: searchParams.location.toLowerCase(),
       },
     };
     where.location = location;
@@ -51,7 +52,7 @@ const getFilteredRestaurants = (searchParams: searchParams) => {
   if (searchParams.cuisine) {
     const cuisine = {
       name: {
-        equals: searchParams.cuisine,
+        equals: searchParams.cuisine.toLowerCase(),
       },
     };
     where.cuisine = cuisine;

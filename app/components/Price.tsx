@@ -1,6 +1,4 @@
 import { PRICE } from "@prisma/client";
-import React, { ReactNode } from "react";
-import { JsxElement } from "typescript";
 
 const Price = ({ price }: { price: PRICE }) => {
   const PriceChart = (price: PRICE): JSX.Element => {
