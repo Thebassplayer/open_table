@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = () => {
+const Form = (): JSX.Element => {
   return (
     <div className="mt-10 flex flex-wrap justify-between w-[660px]">
       <input

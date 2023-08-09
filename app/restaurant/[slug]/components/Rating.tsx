@@ -1,6 +1,6 @@
 import React from "react";
 
-const Rating = () => {
+const Rating = (): JSX.Element => {
   return (
     <div className="flex items-end">
       <div className="ratings mt-2 flex items-center">

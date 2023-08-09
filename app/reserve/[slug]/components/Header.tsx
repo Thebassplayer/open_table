@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = () => {
+const Header = (): JSX.Element => {
   return (
     <div>
       <h3 className="font-bold">You're almost done!</h3>

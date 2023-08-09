@@ -9,6 +9,6 @@ export default function SearchLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}): JSX.Element {
   return <>{children}</>;
 }

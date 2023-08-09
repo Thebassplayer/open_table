@@ -13,7 +13,7 @@ const RestaurantLayout = ({
 }: {
   children: React.ReactNode;
   params: { slug: string };
-}) => {
+}): JSX.Element => {
   return (
     <>
       <Header name={params.slug} />

@@ -2,7 +2,7 @@ import { Review } from "@prisma/client";
 import React from "react";
 import UserAvatar from "./UserAvatar";
 
-const ReviewCard = ({ review }: { review: Review }) => {
+const ReviewCard = ({ review }: { review: Review }): JSX.Element => {
   const { id, rating, first_name, last_name, text: textReview } = review;
   const userInitials = `${first_name[0]} ${last_name[0]}`;
   const fullName = `${first_name} ${last_name}`;

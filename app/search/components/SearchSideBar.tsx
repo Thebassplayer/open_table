@@ -12,7 +12,7 @@ const SearchSideBar = ({
   restaurantsLocation,
   cuisines,
   searchParams,
-}: SearchSideBarProps) => {
+}: SearchSideBarProps): JSX.Element => {
   const prices = [
     {
       price: PRICE.CHEAP,

@@ -5,12 +5,14 @@ import Link from "next/link";
 import Price from "./Price";
 // Types
 import { RestaurantCardType } from "../page";
+import Stars from "./Stars";
+import { calculateReviewRatingAverage } from "@/utils/calculateReviewRatingsAverage";
 
 interface RestaurantCardProps {
   restaurant: RestaurantCardType;
 }
 
-const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
+const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
   const { name, main_image, cuisine, location, price, slug, reviews } =
     restaurant;
 
@@ -26,6 +28,8 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
     default:
       reviewText = `${reviews.length} reviews`;
   }
+
+  const numberOfStars = calculateReviewRatingAverage(reviews);
   return (
     <div className="border-b flex pb-5 ml-4">
       <img
@@ -35,8 +39,8 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
       />
       <div className="pl-5">
         <h2 className="text-3xl">{name}</h2>
-        <div className="flex items-start">
-          <div className="flex mb-2">*****</div>
+        <div className="flex items-baseline">
+          <Stars numberOfStars={numberOfStars} />
           <p className="ml-2 text-sm">{reviewText}</p>
         </div>
         <div className="mb-9">

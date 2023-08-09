@@ -19,7 +19,7 @@ const RestaurantCard = ({
   restaurant,
 }: {
   restaurant: RestaurantCardProps;
-}) => {
+}): JSX.Element => {
   const { name, main_image, cuisine, location, price, slug, reviews } =
     restaurant;
 

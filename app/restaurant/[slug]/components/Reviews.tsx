@@ -7,7 +7,7 @@ interface ReviewsProps {
 
 // type Stars = "" | "*" | "**" | "***" | "****" | "*****";
 
-const Reviews = ({ reviews }: ReviewsProps) => {
+const Reviews = ({ reviews }: ReviewsProps): JSX.Element => {
   const numberOfReviews = reviews.length;
   return !numberOfReviews ? (
     <div>

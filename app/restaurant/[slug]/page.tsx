@@ -38,12 +38,15 @@ const getRestaurantBySlug = async (slug: string): Promise<Restaurant> => {
   return restaurant;
 };
 
-const RestaurantDetails = async ({ params }: { params: { slug: string } }) => {
+const RestaurantDetails = async ({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<JSX.Element> => {
   const { slug } = params;
 
   const restaurant = await getRestaurantBySlug(slug);
   const { name, images, description, reviews } = restaurant;
-  console.log(reviews);
 
   return (
     <>

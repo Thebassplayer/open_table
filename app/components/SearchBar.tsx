@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const SearchBar = () => {
+const SearchBar = (): JSX.Element => {
   const [location, setLocation] = useState("");
   const router = useRouter();
 

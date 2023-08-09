@@ -3,7 +3,7 @@ import Header from "./components/Header";
 import NavBar from "@/app/components/NavBar";
 import Form from "./components/Form";
 
-const Reservation = () => {
+const Reservation = (): JSX.Element => {
   return (
     <div className="border-t h-screen">
       <div className="py-9 w-3/5 m-auto">

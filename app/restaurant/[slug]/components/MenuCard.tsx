@@ -1,7 +1,7 @@
 import { Item } from "@prisma/client";
 import React from "react";
 
-const MenuCard = ({ item }: { item: Item }) => {
+const MenuCard = ({ item }: { item: Item }): JSX.Element => {
   const { name, description, price } = item;
   return (
     <div className=" border rounded p-3 w-[49%] mb-3">

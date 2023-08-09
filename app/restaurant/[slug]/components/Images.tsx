@@ -1,6 +1,6 @@
 import React from "react";
 
-const Images = ({ images }: { images: string[] }) => {
+const Images = ({ images }: { images: string[] }): JSX.Element => {
   return (
     <div>
       <h1 className="font-bold text-3xl mt-10 mb-7 border-b pb-5">

@@ -1,16 +1,16 @@
 import { Review } from "@prisma/client";
 
-type Rating = 0 | 1 | 2 | 3 | 4 | 5;
-
-export const calculateReviewRatingAverage = (reviews: Review[]): Rating => {
+export const calculateReviewRatingAverage = (
+  reviews: Review[]
+): RestaurantRating => {
   if (!reviews.length) return 0;
 
   const totalRating = reviews.reduce((acc, review) => {
     return acc + review.rating;
   }, 0);
 
-  const averageRating = Math.floor(totalRating / reviews.length);
+  const averageRating = totalRating / reviews.length;
 
-  // Ensure the result is within the range of 0 to 5
-  return Math.min(Math.max(averageRating, 0), 5) as Rating;
+  // Round the averageRating to the nearest 0.5
+  return (Math.round(averageRating * 2) / 2) as RestaurantRating;
 };

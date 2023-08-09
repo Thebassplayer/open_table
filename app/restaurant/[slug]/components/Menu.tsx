@@ -2,7 +2,7 @@ import React from "react";
 import MenuCard from "./MenuCard";
 import { Item } from "@prisma/client";
 
-const Menu = ({ menu }: { menu: Item[] }) => {
+const Menu = ({ menu }: { menu: Item[] }): JSX.Element => {
   return (
     <main className="bg-white mt-5">
       <div>

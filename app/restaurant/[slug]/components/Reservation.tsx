@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-const Reservation = () => {
+const Reservation = (): JSX.Element => {
   return (
     <div className="fixed w-[15%] bg-white rounded p-3 shadow">
       <div className="text-center border-b pb-2 font-bold">

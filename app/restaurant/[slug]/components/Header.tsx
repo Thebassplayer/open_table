@@ -1,7 +1,7 @@
 import React from "react";
 import renderTitleFromSlug from "@/app/utils/renderTitleFromSlug";
 
-const Header = ({ name }: { name: string }) => {
+const Header = ({ name }: { name: string }): JSX.Element => {
   const headerTitle = renderTitleFromSlug(name);
 
   return (

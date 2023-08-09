@@ -7,7 +7,11 @@ export const metadata: Metadata = {
   description: "Find your next restaurant",
 };
 
-const RestaurantLayout = ({ children }: { children: React.ReactNode }) => {
+const RestaurantLayout = ({
+  children,
+}: {
+  children: React.ReactNode;
+}): JSX.Element => {
   return <>{children}</>;
 };
 
