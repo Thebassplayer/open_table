@@ -1,16 +1,17 @@
-import React from "react";
+// Components
 import emptyStar from "../../public/icons/empty-star.png";
 import halfStar from "../../public/icons/half-star.png";
 import fullStar from "../../public/icons/full-star.png";
+// Next
 import Image from "next/image";
+import { Review } from "@prisma/client";
+import { calculateReviewRatingAverage } from "@/utils/calculateReviewRatingsAverage";
 
 const STAR_SIZE = 14; // Constant for star width and height
 
-const Stars = ({
-  numberOfStars,
-}: {
-  numberOfStars: RestaurantRating;
-}): JSX.Element => {
+const Stars = ({ reviews }: { reviews: Review[] }): JSX.Element => {
+  const numberOfStars = calculateReviewRatingAverage(reviews);
+
   const renderStars = () => {
     const numberOfFullStars = Math.floor(numberOfStars);
     const numberOfEmptyStars = Math.floor(5 - numberOfStars);

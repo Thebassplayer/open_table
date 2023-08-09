@@ -28,8 +28,6 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
     default:
       reviewText = `${reviews.length} reviews`;
   }
-
-  const numberOfStars = calculateReviewRatingAverage(reviews);
   return (
     <div className="border-b flex pb-5 ml-4">
       <img
@@ -40,7 +38,7 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
       <div className="pl-5">
         <h2 className="text-3xl">{name}</h2>
         <div className="flex items-baseline">
-          <Stars numberOfStars={numberOfStars} />
+          <Stars reviews={reviews} />
           <p className="ml-2 text-sm">{reviewText}</p>
         </div>
         <div className="mb-9">

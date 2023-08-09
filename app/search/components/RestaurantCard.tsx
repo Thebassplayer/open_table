@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Cuisine, Location, PRICE, Review } from "@prisma/client";
 import Price from "@/app/components/Price";
 import { calculateReviewRatingAverage } from "@/utils/calculateReviewRatingsAverage";
+import Stars from "@/app/components/Stars";
+import ReviewText from "./ReviewText";
 
 interface RestaurantCardProps {
   id: number;
@@ -23,39 +25,33 @@ const RestaurantCard = ({
   const { name, main_image, cuisine, location, price, slug, reviews } =
     restaurant;
 
-  const generateReviewTextAnsStars = () => {
+  const generateReviewText = () => {
     const rating = calculateReviewRatingAverage(reviews);
     let text = "";
-    let stars = "";
 
-    switch (rating) {
+    switch (Math.floor(rating)) {
       case 1:
         text = "Poor";
-        stars = "*";
         break;
       case 2:
         text = "Fair";
-        stars = "**";
         break;
       case 3:
         text = "Good";
-        stars = "***";
         break;
       case 4:
         text = "Great";
-        stars = "****";
         break;
       case 5:
         text = "Awesome";
-        stars = "*****";
         break;
       default:
         break;
     }
-    return { text, stars };
+    return { text };
   };
 
-  const { text, stars } = generateReviewTextAnsStars();
+  const { text } = generateReviewText();
 
   return (
     <div className="border-b flex pb-5">
@@ -63,8 +59,8 @@ const RestaurantCard = ({
       <div className="pl-5">
         <h2 className="text-3xl">{name}</h2>
         <div className="flex items-start">
-          <div className="flex mb-2">{stars}</div>
-          <p className="ml-2 text-sm">{text}</p>
+          <Stars reviews={reviews} />
+          <ReviewText reviews={reviews} />
         </div>
         <div className="mb-9">
           <div className="font-light flex text-reg">
