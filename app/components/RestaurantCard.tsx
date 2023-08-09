@@ -6,7 +6,6 @@ import Price from "./Price";
 // Types
 import { RestaurantCardType } from "../page";
 import Stars from "./Stars";
-import { calculateReviewRatingAverage } from "@/utils/calculateReviewRatingsAverage";
 
 interface RestaurantCardProps {
   restaurant: RestaurantCardType;
@@ -29,28 +28,23 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
       reviewText = `${reviews.length} reviews`;
   }
   return (
-    <div className="border-b flex pb-5 ml-4">
-      <img
-        src={main_image}
-        alt="Restaurant Image"
-        className="w-44 h-36 rounded"
-      />
-      <div className="pl-5">
-        <h2 className="text-3xl">{name}</h2>
-        <div className="flex items-baseline">
+    <div className="w-64 h-72 m-3 rounded overflow-hidden border cursor-pointer">
+      <img src={main_image} alt="" className="w-full h-36" />
+      <div className="p-1">
+        <h3 className="font-bold text-2xl mb-2">{name}</h3>
+        <div className="flex items-start">
           <Stars reviews={reviews} />
           <p className="ml-2 text-sm">{reviewText}</p>
         </div>
-        <div className="mb-9">
-          <div className="flex text-reg font-light">
-            <Price price={price} />
-            <p className="mr-4 capitalize">{cuisine.name}</p>
-            <p className="mr-4 capitalize">{location.name}</p>
-          </div>
+        <div className="flex text-reg font-light capitalize">
+          <p className="mr-4 capitalize">{cuisine.name}</p>
+          <Price price={price} />
+          <p className="mr-4 capitalize">{location.name}</p>
         </div>
-        <div className="text-red-600">
-          <Link href={`/restaurant/${slug}`}>View more information</Link>
-        </div>
+        <Link href={`/restaurant/${slug}`}>
+          {" "}
+          <p className="text-sm mt-1 font-bold">Booked 3 times today</p>
+        </Link>
       </div>
     </div>
   );
