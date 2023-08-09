@@ -53,7 +53,7 @@ const RestaurantDetails = async ({
       <div className="bg-white w-[70%] rounded p-3 shadow">
         <RestaurantNav slug={slug} />
         <Title name={name} />
-        <Rating />
+        <Rating reviews={reviews} />
         <Description description={description} />
         <Images images={images} />
         {}

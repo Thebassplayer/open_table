@@ -25,34 +25,6 @@ const RestaurantCard = ({
   const { name, main_image, cuisine, location, price, slug, reviews } =
     restaurant;
 
-  const generateReviewText = () => {
-    const rating = calculateReviewRatingAverage(reviews);
-    let text = "";
-
-    switch (Math.floor(rating)) {
-      case 1:
-        text = "Poor";
-        break;
-      case 2:
-        text = "Fair";
-        break;
-      case 3:
-        text = "Good";
-        break;
-      case 4:
-        text = "Great";
-        break;
-      case 5:
-        text = "Awesome";
-        break;
-      default:
-        break;
-    }
-    return { text };
-  };
-
-  const { text } = generateReviewText();
-
   return (
     <div className="border-b flex pb-5">
       <img src={main_image} alt="" className="w-44 rounded" />
@@ -70,7 +42,7 @@ const RestaurantCard = ({
           </div>
         </div>
         <div className="text-red-600">
-          <Link href="/restaurant/milestones">View more information</Link>
+          <Link href={`/restaurant/${slug}`}>View more information</Link>
         </div>
       </div>
     </div>

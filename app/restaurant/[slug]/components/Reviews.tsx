@@ -5,9 +5,8 @@ interface ReviewsProps {
   reviews: Review[];
 }
 
-// type Stars = "" | "*" | "**" | "***" | "****" | "*****";
-
 const Reviews = ({ reviews }: ReviewsProps): JSX.Element => {
+  console.log(reviews);
   const numberOfReviews = reviews.length;
   return !numberOfReviews ? (
     <div>

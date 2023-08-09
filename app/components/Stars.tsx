@@ -9,8 +9,16 @@ import { calculateReviewRatingAverage } from "@/utils/calculateReviewRatingsAver
 
 const STAR_SIZE = 14; // Constant for star width and height
 
-const Stars = ({ reviews }: { reviews: Review[] }): JSX.Element => {
-  const numberOfStars = calculateReviewRatingAverage(reviews);
+const Stars = ({ reviews }: { reviews: Review | Review[] }): JSX.Element => {
+  let averageRating;
+
+  if (Array.isArray(reviews)) {
+    averageRating = calculateReviewRatingAverage(reviews);
+  } else {
+    averageRating = reviews.rating;
+  }
+
+  const numberOfStars = averageRating;
 
   const renderStars = () => {
     const numberOfFullStars = Math.floor(numberOfStars);

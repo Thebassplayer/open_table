@@ -1,6 +1,7 @@
 import { Review } from "@prisma/client";
 import React from "react";
 import UserAvatar from "./UserAvatar";
+import Stars from "@/app/components/Stars";
 
 const ReviewCard = ({ review }: { review: Review }): JSX.Element => {
   const { id, rating, first_name, last_name, text: textReview } = review;
@@ -17,7 +18,7 @@ const ReviewCard = ({ review }: { review: Review }): JSX.Element => {
           </div>
           <div className="ml-10 w-5/6">
             <div className="flex items-center">
-              <div className="flex mr-5">{stars}</div>
+              <Stars reviews={review} />
             </div>
             <div className="mt-5">
               <p className="text-lg font-light">{textReview}</p>
