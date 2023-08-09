@@ -9,6 +9,7 @@ import Reservation from "./components/Reservation";
 // Prisma
 import { prisma } from "@/app/lib/prisma";
 import { Review } from "@prisma/client";
+import { notFound } from "next/navigation";
 
 interface Restaurant {
   id: number;
@@ -33,7 +34,9 @@ const getRestaurantBySlug = async (slug: string): Promise<Restaurant> => {
       reviews: true,
     },
   });
-  if (!restaurant) throw new Error("Restaurant not found");
+  if (!restaurant) {
+    notFound();
+  }
 
   return restaurant;
 };
