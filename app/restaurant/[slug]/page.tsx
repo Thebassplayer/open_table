@@ -8,6 +8,7 @@ import Rating from "./components/Rating";
 import Reservation from "./components/Reservation";
 // Prisma
 import { prisma } from "@/app/lib/prisma";
+import { Review } from "@prisma/client";
 
 interface Restaurant {
   id: number;
@@ -15,6 +16,7 @@ interface Restaurant {
   images: string[];
   description: string;
   slug: string;
+  reviews: Review[];
 }
 
 const getRestaurantBySlug = async (slug: string): Promise<Restaurant> => {
@@ -28,6 +30,7 @@ const getRestaurantBySlug = async (slug: string): Promise<Restaurant> => {
       images: true,
       description: true,
       slug: true,
+      reviews: true,
     },
   });
   if (!restaurant) throw new Error("Restaurant not found");
@@ -39,7 +42,8 @@ const RestaurantDetails = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
 
   const restaurant = await getRestaurantBySlug(slug);
-  const { name, images, description } = restaurant;
+  const { name, images, description, reviews } = restaurant;
+  console.log(reviews);
 
   return (
     <>
@@ -49,7 +53,8 @@ const RestaurantDetails = async ({ params }: { params: { slug: string } }) => {
         <Rating />
         <Description description={description} />
         <Images images={images} />
-        <Reviews />
+        {}
+        <Reviews reviews={reviews} />
       </div>
       <div className="w-[27%] relative text-reg">
         <Reservation />
