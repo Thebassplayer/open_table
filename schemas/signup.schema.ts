@@ -1,0 +1,23 @@
+import { z } from "zod";
+
+const signupFormSchema = z.object({
+  firstName: z
+    .string()
+    .min(3, "First name should be at least 3 characters")
+    .max(50, "First name should be at most 50 characters"),
+  lastName: z
+    .string()
+    .min(3, "Last name should be at least 3 characters")
+    .max(50, "First name should be at most 50 characters"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().regex(/^\d{10}$/, "Phone number should be 10 digits"),
+  city: z
+    .string()
+    .min(2, "City name should be at least 2 characters")
+    .max(50, "City name should be at most 50 characters"),
+  password: z.string().min(6, "Password should be at least 6 characters"),
+});
+
+export type SignupFormValues = z.infer<typeof signupFormSchema>;
+
+export default signupFormSchema;

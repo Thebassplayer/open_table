@@ -4,7 +4,7 @@ import Link from "next/link";
 // Components
 import AuthButtonAndModal, {
   AUTH_BUTTON_AND_MODAL_TYPE,
-} from "./AuthButtonAndModal";
+} from "./AuthComponents/AuthButtonAndModal";
 
 const NavBar = (): JSX.Element => {
   return (
