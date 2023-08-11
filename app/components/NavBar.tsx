@@ -1,6 +1,10 @@
 "use client";
-import React from "react";
+// Next
 import Link from "next/link";
+// Components
+import AuthButtonAndModal, {
+  AUTH_BUTTON_AND_MODAL_TYPE,
+} from "./AuthButtonAndModal";
 
 const NavBar = (): JSX.Element => {
   return (
@@ -10,10 +14,8 @@ const NavBar = (): JSX.Element => {
       </Link>
       <div>
         <div className="flex">
-          <button className="bg-blue-400 text-white border p-1 px-4 rounded mr-3">
-            Sign in
-          </button>
-          <button className="border p-1 px-4 rounded">Sign up</button>
+          <AuthButtonAndModal type={AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN} />
+          <AuthButtonAndModal type={AUTH_BUTTON_AND_MODAL_TYPE.SIGN_UP} />
         </div>
       </div>
     </nav>
