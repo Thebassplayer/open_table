@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AUTH_BUTTON_AND_MODAL_TYPE } from "./AuthButtonAndModal";
 import { Formik, Form, Field } from "formik";
 import { toFormikValidationSchema } from "zod-formik-adapter";
-import signupFormSchema from "@/schemas/signup.schema";
+import signUpFormSchema from "@/schemas/signup.schema";
 import FormikInputComponent from "./FormikInputComponent";
 
 export interface AuthModalFormProps {
@@ -43,29 +43,53 @@ const AuthModalForm = ({
     case AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN:
       formikForm = (
         <>
-          <div className="my-3 flex justify-between text-sm">
-            <input
-              name={"email"}
-              className="border rounded p-2 py-3 w-full"
-              type="email"
-              placeholder="Email"
-              value={inputs.email}
-              onChange={handleChangeInput}
-            />
-          </div>
-          <div className="my-3 flex justify-between text-sm">
-            <input
-              name={"password"}
-              className="border rounded p-2 py-3 w-full"
-              type="password"
-              placeholder="Password"
-              value={inputs.password}
-              onChange={handleChangeInput}
-            />
-          </div>
-          <button className="uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400">
-            Sign In
-          </button>
+          <Formik
+            initialValues={{
+              firstName: "",
+              lastName: "",
+              email: "",
+              phone: "",
+              city: "",
+              password: "",
+            }}
+            validationSchema={toFormikValidationSchema(signUpFormSchema)}
+            onSubmit={async values => {
+              await new Promise(resolve => setTimeout(resolve, 500));
+              alert(JSON.stringify(values, null, 2));
+            }}
+          >
+            {({ errors, touched, isValid }) => (
+              <Form>
+                <div className="my-3 flex flex-col justify-between text-sm">
+                  <FormikInputComponent
+                    name="email"
+                    className="w-full"
+                    type="email"
+                    placeholder="Email"
+                    errors={errors}
+                    touched={touched}
+                    tooltipPlacement="left"
+                  />
+                  <FormikInputComponent
+                    name="password"
+                    className="w-full"
+                    type="password"
+                    placeholder="Password"
+                    errors={errors}
+                    touched={touched}
+                    tooltipPlacement="left"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
+                  disabled={!isValid}
+                >
+                  Sign In
+                </button>
+              </Form>
+            )}
+          </Formik>
         </>
       );
       break;
@@ -81,9 +105,9 @@ const AuthModalForm = ({
               city: "",
               password: "",
             }}
-            validationSchema={toFormikValidationSchema(signupFormSchema)}
+            validationSchema={toFormikValidationSchema(signUpFormSchema)}
             // validate={values => {
-            //   const result = signupFormSchema.safeParse(values);
+            //   const result = signUpFormSchema.safeParse(values);
             //   if (result.success) return;
 
             //   console.log(result.error.issues);

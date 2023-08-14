@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const signupFormSchema = z.object({
+const signUpFormSchema = z.object({
   firstName: z
     .string()
     .min(3, "First name should be at least 3 characters")
@@ -18,6 +18,6 @@ const signupFormSchema = z.object({
   password: z.string().min(6, "Password should be at least 6 characters"),
 });
 
-export type SignupFormValues = z.infer<typeof signupFormSchema>;
+export type SignupFormValues = z.infer<typeof signUpFormSchema>;
 
-export default signupFormSchema;
+export default signUpFormSchema;
