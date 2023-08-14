@@ -1,8 +1,10 @@
 // Components
 import Header from "@/app/components/Header";
 import RestaurantCard from "@/app/components/RestaurantCard";
-import { Cuisine, Location, PRICE, Review } from "@prisma/client";
+// Prisma
 import { prisma } from "@/app/lib/prisma";
+import { Cuisine, Location, PRICE, Review } from "@prisma/client";
+import { ToastContainer } from "react-toastify";
 
 export interface RestaurantCardType {
   id: number;
@@ -34,13 +36,16 @@ const getAllRestaurants = async (): Promise<RestaurantCardType[]> => {
 export default async function Home() {
   const restaurants = await getAllRestaurants();
   return (
-    <main>
-      <Header />
-      <div className="py-3 px-36 mt-10 flex flex-wrap justify-center">
-        {restaurants.map(restaurant => (
-          <RestaurantCard restaurant={restaurant} />
-        ))}
-      </div>
-    </main>
+    <>
+      <ToastContainer />
+      <main>
+        <Header />
+        <div className="py-3 px-36 mt-10 flex flex-wrap justify-center">
+          {restaurants.map(restaurant => (
+            <RestaurantCard restaurant={restaurant} />
+          ))}
+        </div>
+      </main>
+    </>
   );
 }

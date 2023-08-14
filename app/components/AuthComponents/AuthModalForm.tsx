@@ -4,6 +4,7 @@ import { AUTH_BUTTON_AND_MODAL_TYPE } from "./AuthButtonAndModal";
 import { Formik, Form, Field } from "formik";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import signUpFormSchema from "@/schemas/signup.schema";
+import signInFormSchema from "../../../schemas/signIn.schema";
 import FormikInputComponent from "./FormikInputComponent";
 
 export interface AuthModalFormProps {
@@ -12,31 +13,9 @@ export interface AuthModalFormProps {
     | typeof AUTH_BUTTON_AND_MODAL_TYPE.SIGN_UP;
 }
 
-interface AuthModalFormState {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  city: string;
-  password: string;
-}
-
 const AuthModalForm = ({
   type: authButtonAndModalType,
 }: AuthModalFormProps) => {
-  const [inputs, setInputs] = useState<AuthModalFormState>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    city: "",
-    password: "",
-  });
-
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputs({ ...inputs, [e.target.name]: e.target.value });
-  };
-
   let formikForm = null;
 
   switch (authButtonAndModalType) {
@@ -52,7 +31,7 @@ const AuthModalForm = ({
               city: "",
               password: "",
             }}
-            validationSchema={toFormikValidationSchema(signUpFormSchema)}
+            validationSchema={toFormikValidationSchema(signInFormSchema)}
             onSubmit={async values => {
               await new Promise(resolve => setTimeout(resolve, 500));
               alert(JSON.stringify(values, null, 2));
