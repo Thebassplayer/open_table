@@ -1,11 +1,11 @@
 import { z } from "zod";
 
 const signUpFormSchema = z.object({
-  firstName: z
+  first_name: z
     .string()
     .min(3, "First name should be at least 3 characters")
     .max(50, "First name should be at most 50 characters"),
-  lastName: z
+  last_name: z
     .string()
     .min(3, "Last name should be at least 3 characters")
     .max(50, "First name should be at most 50 characters"),
@@ -18,6 +18,6 @@ const signUpFormSchema = z.object({
   password: z.string().min(6, "Password should be at least 6 characters"),
 });
 
-export type SignupFormValues = z.infer<typeof signUpFormSchema>;
+export type SignUpFormValues = z.infer<typeof signUpFormSchema>;
 
 export default signUpFormSchema;
