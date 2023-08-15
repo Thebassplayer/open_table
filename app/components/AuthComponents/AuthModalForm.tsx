@@ -45,7 +45,7 @@ const AuthModalForm: React.FC<AuthModalFormProps> = ({ type }) => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ errors, touched, isValid }) => (
+      {({ errors, touched, isValid, dirty }) => (
         <Form>
           {!isSignIn && (
             <div className="my-3 flex justify-between text-sm">
@@ -80,6 +80,8 @@ const AuthModalForm: React.FC<AuthModalFormProps> = ({ type }) => {
               touched={touched}
               tooltipPlacement="left"
             />
+          </div>
+          <div className="my-3 flex justify-between text-sm">
             {!isSignIn && (
               <FormikInputComponent
                 name="phone"
@@ -119,7 +121,7 @@ const AuthModalForm: React.FC<AuthModalFormProps> = ({ type }) => {
           <button
             type="submit"
             className="uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
-            disabled={!isValid}
+            disabled={!isValid || !dirty}
           >
             {isSignIn ? "Sign In" : "Create Account"}
           </button>

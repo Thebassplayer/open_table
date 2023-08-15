@@ -14,6 +14,7 @@ export default async function handler(
   req: SignInApiRequest,
   res: NextApiResponse
 ) {
+  console.log("singin");
   if (req.method === "POST") {
     const validBody = signInFormSchema.safeParse(req.body);
     if (!validBody.success) {
@@ -50,7 +51,7 @@ export default async function handler(
       .setExpirationTime("24h")
       .sign(secret);
 
-    return res.status(200).json({ message: token });
+    return res.status(200).json({ token: token });
   }
 
   return res.status(404).json({ message: "Not Found" });

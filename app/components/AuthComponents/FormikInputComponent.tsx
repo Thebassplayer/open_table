@@ -41,9 +41,6 @@ const FormikInputComponent = ({
           type={type}
           placeholder={placeholder}
         />
-        {/* {errors[name] && touched[name] ? (
-          <div className="text-sm text-red-500">{errors[name]}</div>
-        ) : null} */}
       </div>
       {errors[name] && touched[name] ? (
         <Tooltip
