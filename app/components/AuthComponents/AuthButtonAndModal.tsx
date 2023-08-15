@@ -67,8 +67,8 @@ const AuthButtonAndModal = ({
         aria-describedby="modal-modal-description"
       >
         <Box sx={boxStyle}>
-          <div className="p-2 h-[500px]">
-            <div className="uppercase font-bold text-center pb-2 border-b mb-2">
+          <div className="p-2 h-[600px]">
+            <div className="uppercase font-bold text-center pb-2 mb-2">
               <p className="text-sm">
                 {authButtonAndModalType === AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN
                   ? "Sign in"

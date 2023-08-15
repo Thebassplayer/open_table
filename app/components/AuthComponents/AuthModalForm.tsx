@@ -105,13 +105,23 @@ const AuthModalForm: React.FC<AuthModalFormProps> = ({ type }) => {
               />
             )}
           </div>
-
           <div className="my-3 flex justify-between text-sm">
             <FormikInputComponent
               name="password"
               className="w-full"
               type="password"
               placeholder="Password"
+              errors={errors}
+              touched={touched}
+              tooltipPlacement="left"
+            />
+          </div>
+          <div className="my-3 flex justify-between text-sm">
+            <FormikInputComponent
+              name="confirm_password"
+              className="w-full"
+              type="password"
+              placeholder="Confirm Password"
               errors={errors}
               touched={touched}
               tooltipPlacement="left"
