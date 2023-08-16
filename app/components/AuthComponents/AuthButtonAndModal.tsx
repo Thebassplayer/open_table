@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 // Mui
 import Box from "@mui/material/Box";

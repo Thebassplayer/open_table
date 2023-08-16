@@ -1,5 +1,10 @@
+// Components
 import NavBar from "./components/NavBar";
+// Context
+import AuthContext from "./context/AuthContext";
+// Styles
 import "./globals.css";
+// Types
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,10 +21,13 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <main className="bg-gray-100 min-h-screen w-screen">
-          <main className="max-w-screen-2xl m-auto bg-white pb-20">
-            <NavBar />
-            {children}
-          </main>
+          <AuthContext>
+            <main className="max-w-screen-2xl m-auto bg-white pb-20">
+              <NavBar />
+              {children}
+              AuthContext
+            </main>
+          </AuthContext>
         </main>
       </body>
     </html>

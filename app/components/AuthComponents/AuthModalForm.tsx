@@ -1,14 +1,18 @@
-import React from "react";
+"use client";
+// Formik
 import { Formik, Form } from "formik";
 import { toFormikValidationSchema } from "zod-formik-adapter";
+// Schemas
 import signUpFormSchema, {
   SignUpFormValues,
 } from "../../../schemas/signUp.schema";
 import signInFormSchema, {
   SignInFormValues,
 } from "../../../schemas/signIn.schema";
+// Components
 import FormikInputComponent from "./FormikInputComponent";
 import { AUTH_BUTTON_AND_MODAL_TYPE } from "./AuthButtonAndModal";
+// Hooks
 import useAuth from "@/app/hooks/useAuth";
 
 interface AuthModalFormProps {

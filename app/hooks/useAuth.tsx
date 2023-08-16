@@ -1,11 +1,19 @@
-import { AxiosResponse } from "axios";
-import { SignInFormValues } from "@/schemas/signIn.schema";
+// Axios
 import axios from "axios";
+import { AxiosResponse } from "axios";
+// Schemas
+import { SignInFormValues } from "@/schemas/signIn.schema";
+// Context
+import { useContext } from "react";
+import { AuthenticationContext } from "../context/AuthContext";
 
 interface ApiResponse {
-  // Define the structure of the API response if needed
-  // For example:
-  message: string;
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  city: string;
 }
 
 interface AuthFunctions {
@@ -14,10 +22,15 @@ interface AuthFunctions {
 }
 
 const useAuth = (): AuthFunctions => {
+  const { data, loading, error, setAuthState } = useContext(
+    AuthenticationContext
+  );
   const signIn = async ({
     email,
     password,
   }: SignInFormValues): Promise<void> => {
+    setAuthState({ loading: true, data: null, error: null });
+
     try {
       const response: AxiosResponse<ApiResponse> = await axios.post(
         "http://localhost:3000/api/auth/signin",
@@ -26,9 +39,14 @@ const useAuth = (): AuthFunctions => {
           password,
         }
       );
-      console.log(response.data.message);
-    } catch (error) {
-      console.error("Sign in error:", error);
+      console.log(response);
+      setAuthState({ loading: false, data: response.data, error: null });
+    } catch (error: any) {
+      setAuthState({
+        loading: false,
+        data: null,
+        error: error.response.data.errorMessage,
+      });
     }
   };
 
