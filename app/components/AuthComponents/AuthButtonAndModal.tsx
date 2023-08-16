@@ -81,7 +81,7 @@ const AuthButtonAndModal = ({
                   ? "Log Into Your Account"
                   : "Create Your OpenTable Account"}
               </h2>
-              <AuthModalForm type={authButtonAndModalType} />
+              <AuthModalForm formType={authButtonAndModalType} />
             </div>
           </div>
         </Box>
