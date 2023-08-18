@@ -39,13 +39,12 @@ const useAuth = (): AuthFunctions => {
           password,
         }
       );
-      console.log(response);
       setAuthState({ loading: false, data: response.data, error: null });
     } catch (error: any) {
       setAuthState({
-        loading: false,
         data: null,
-        error: error.response.data.errorMessage,
+        loading: false,
+        error: error.response.data.message,
       });
     }
   };

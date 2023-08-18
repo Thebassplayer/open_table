@@ -22,7 +22,7 @@ interface AuthModalFormProps {
 }
 
 const AuthModalForm: React.FC<AuthModalFormProps> = ({ formType }) => {
-  const { signIn } = useAuth();
+  const { signIn, signUp } = useAuth();
   const isSignIn = formType === AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN;
 
   const initialValues = isSignIn
@@ -44,7 +44,8 @@ const AuthModalForm: React.FC<AuthModalFormProps> = ({ formType }) => {
     if (isSignIn) {
       signIn(values as SignInFormValues);
     } else {
-      console.log(values);
+      const { confirm_password, ...rest } = values as SignUpFormValues;
+      signUp();
     }
   };
 

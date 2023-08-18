@@ -31,7 +31,7 @@ const AuthContext = ({ children }: { children: React.ReactNode }) => {
   const [authState, setAuthState] = useState<AuthState>({
     loading: false,
     data: null,
-    error: "Error Test",
+    error: null,
   });
   return (
     <AuthenticationContext.Provider value={{ ...authState, setAuthState }}>
