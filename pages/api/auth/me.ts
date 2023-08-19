@@ -28,6 +28,8 @@ export default async function handler(
       email: true,
       first_name: true,
       last_name: true,
+      phone: true,
+      city: true,
       reviews: {
         select: {
           restaurant: true,
@@ -37,5 +39,15 @@ export default async function handler(
     },
   });
 
-  return res.status(200).json({ user });
+  if (!user) {
+    return res.status(404).json({ error: "User not found" });
+  }
+
+  return res.status(200).json({
+    id: user.id,
+    firsfName: user.first_name,
+    lastName: user.last_name,
+    phone: user.phone,
+    city: user.city,
+  });
 }

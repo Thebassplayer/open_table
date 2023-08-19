@@ -1,10 +1,11 @@
+"use client";
 import { useContext, useEffect, useState } from "react";
 // Mui
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 // Components
 import AuthModalForm from "./AuthModalForm";
-import { Alert, CircularProgress } from "@mui/material";
+import { Alert } from "@mui/material";
 // Context
 import { AuthenticationContext } from "@/app/context/AuthContext";
 
@@ -33,11 +34,11 @@ export interface AuthButtonAndModalProps {
 const AuthButtonAndModal = ({
   type: authButtonAndModalType,
 }: AuthButtonAndModalProps): JSX.Element => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpen = () => setIsModalOpen(true);
+  const handleClose = () => setIsModalOpen(false);
   const {
-    data,
+    data: userData,
     isSuccess: AuthSucceded,
     isLoading,
     error,
@@ -48,6 +49,8 @@ const AuthButtonAndModal = ({
       handleClose();
     }
   }, [AuthSucceded]);
+
+  useEffect(() => {}, [!isModalOpen]);
 
   const commonAuthButtonStyles = `border p-1 px-4 rounded ${
     isLoading ? "cursor-not-allowed" : "cursor-pointer"
@@ -80,9 +83,10 @@ const AuthButtonAndModal = ({
 
   return (
     <div>
+      {" "}
       {customAuthButton()}
       <Modal
-        open={open}
+        open={isModalOpen}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
