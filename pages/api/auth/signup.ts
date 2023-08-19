@@ -1,5 +1,6 @@
 // Next
 import { NextApiRequest, NextApiResponse } from "next";
+import { setCookie } from "cookies-next";
 // Prisma
 import { PrismaClient } from "@prisma/client";
 // Bcrypt
@@ -20,11 +21,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const validBody = signUpFormSchema.safeParse(req.body);
-    if (!validBody.success) {
-      return res.status(400).json({ message: "Invalid body" });
-    }
-
     const { email, password } = req.body;
 
     const userWithEmail = await prisma.user.findUnique({
@@ -56,6 +52,18 @@ export default async function handler(
       .setExpirationTime("24h")
       .sign(secret);
 
-    res.status(200).json({ token: token });
+    setCookie("jwt", token, {
+      req,
+      res,
+      maxAge: 24 * 60,
+    });
+
+    return res.status(200).json({
+      firstName: user.first_name,
+      lastName: user.last_name,
+      email: user.email,
+      phone: user.phone,
+      city: user.city,
+    });
   }
 }

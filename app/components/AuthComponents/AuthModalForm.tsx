@@ -12,6 +12,7 @@ import signInFormSchema, {
 // Components
 import FormikInputComponent from "./FormikInputComponent";
 import { AUTH_BUTTON_AND_MODAL_TYPE } from "./AuthButtonAndModal";
+import SignFormButton from "./SignFormButton";
 // Hooks
 import useAuth from "@/app/hooks/useAuth";
 
@@ -44,8 +45,8 @@ const AuthModalForm: React.FC<AuthModalFormProps> = ({ formType }) => {
     if (isSignIn) {
       signIn(values as SignInFormValues);
     } else {
-      const { confirm_password, ...rest } = values as SignUpFormValues;
-      signUp();
+      const { confirm_password, ...signUpValues } = values as SignUpFormValues;
+      signUp(signUpValues);
     }
   };
 
@@ -141,15 +142,7 @@ const AuthModalForm: React.FC<AuthModalFormProps> = ({ formType }) => {
             </div>
           )}
 
-          <button
-            type="submit"
-            className={`uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 ${
-              (!isValid || !dirty) && "disabled:bg-gray-400"
-            }`}
-            disabled={!isValid || !dirty}
-          >
-            {isSignIn ? "Sign In" : "Create Account"}
-          </button>
+          <SignFormButton isValid={isValid} dirty={dirty} isSignIn={isSignIn} />
         </Form>
       )}
     </Formik>

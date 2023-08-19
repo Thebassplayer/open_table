@@ -16,10 +16,16 @@ const signUpFormSchema = z
       .string()
       .min(2, "City name should be at least 2 characters")
       .max(50, "City name should be at most 50 characters"),
-    password: z.string().min(6, "Password should be at least 6 characters"),
+    password: z
+      .string()
+      .min(8, "Password should be at least 8 characters")
+      .regex(
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character"
+      ),
     confirm_password: z
       .string()
-      .min(6, "Password should be at least 6 characters"),
+      .min(8, "Password should be at least 8 characters"),
   })
   .refine(data => data.password === data.confirm_password, {
     message: "Passwords don't match",

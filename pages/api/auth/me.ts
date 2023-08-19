@@ -1,6 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-// Jose
-import * as jose from "jose";
 // jwt
 import jwt from "jsonwebtoken";
 // Prisma

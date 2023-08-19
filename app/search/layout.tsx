@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Search | OpenTable",
+  title: "Search | Cafecitos",
   description: "Find your next restaurant",
 };
 

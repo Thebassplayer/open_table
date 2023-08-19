@@ -11,7 +11,9 @@ export interface User {
 }
 
 interface AuthState {
-  loading: boolean;
+  isLoading: boolean;
+  isSuccess: boolean;
+  isError: boolean;
   data: User | null;
   error: string | null;
 }
@@ -21,16 +23,20 @@ interface AuthContextProps extends AuthState {
 }
 
 export const AuthenticationContext = createContext<AuthContextProps>({
-  loading: false,
   data: null,
+  isSuccess: false,
+  isLoading: false,
+  isError: false,
   error: null,
   setAuthState: () => {},
 });
 
 const AuthContext = ({ children }: { children: React.ReactNode }) => {
   const [authState, setAuthState] = useState<AuthState>({
-    loading: false,
     data: null,
+    isSuccess: false,
+    isLoading: false,
+    isError: false,
     error: null,
   });
   return (

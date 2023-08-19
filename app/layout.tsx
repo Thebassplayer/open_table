@@ -8,7 +8,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "OpenTable",
+  title: "Cafecitos",
   description: "Find your next restaurant",
 };
 
