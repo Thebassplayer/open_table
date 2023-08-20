@@ -25,7 +25,6 @@ export default function RootLayout({
             <main className="max-w-screen-2xl m-auto bg-white pb-20">
               <NavBar />
               {children}
-              AuthContext
             </main>
           </AuthContext>
         </main>

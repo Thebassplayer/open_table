@@ -1,104 +1,89 @@
 "use client";
-import { useState, createContext, useEffect } from "react";
-// Next
-import { getCookie } from "cookies-next";
-// Custom Hooks
+import React, { useState, createContext, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
-
-export interface User {
-  id: number;
-  email: string;
-  first_name: string;
-  last_name: string;
-  phone: string;
-  city: string;
-}
-
-interface AuthState {
-  isLoading: boolean;
-  isSuccess: boolean;
-  isError: boolean;
-  data: User | null;
-  error: string | null;
-}
-
-interface AuthContextProps extends AuthState {
-  setAuthState: React.Dispatch<React.SetStateAction<AuthState>>;
-}
+import { getCookie } from "cookies-next";
+import { AuthContextProps, AuthState } from "@/types/auth";
 
 export const AuthenticationContext = createContext<AuthContextProps>({
-  data: null,
-  isSuccess: false,
+  userData: null,
+  isSignIn: false,
+  isSignUp: false,
+  isLoggedIn: false,
   isLoading: false,
   isError: false,
-  error: null,
+  isFetchingUserState: false,
+  errorData: null,
   setAuthState: () => {},
 });
 
-const AuthContext = ({ children }: { children: React.ReactNode }) => {
-  const [authState, setAuthState] = useState<AuthState>({
-    data: null,
-    isSuccess: false,
+const AuthContext: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const initialAuthState: AuthState = {
+    userData: null,
+    isSignIn: false,
+    isSignUp: false,
+    isLoggedIn: false,
     isLoading: true,
     isError: false,
-    error: null,
-  });
+    isFetchingUserState: true,
+    errorData: null,
+  };
+
+  const [authState, setAuthState] = useState<AuthState>(initialAuthState);
+  console.log("isLoggedIn: ", authState.isLoggedIn);
+
+  const updateAuthState = (newState: Partial<AuthState>): void => {
+    setAuthState(prevState => ({
+      ...prevState,
+      ...newState,
+    }));
+  };
 
   const fetchUser = async (): Promise<void> => {
     try {
       const jwt = getCookie("jwt");
 
       if (!jwt) {
-        setAuthState({
-          data: null,
-          isSuccess: false,
+        updateAuthState({
           isLoading: false,
-          isError: false,
-          error: null,
-        });
-      }
-      const response: AxiosResponse<User> = await axios.get<User>(
-        "http://localhost:3000/api/auth/me",
-        {
-          headers: {
-            Authorization: `Bearer ${jwt}`,
-          },
-        }
-      );
-
-      axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
-
-      setAuthState({
-        data: response.data,
-        isSuccess: true,
-        isLoading: false,
-        isError: false,
-        error: null,
-      });
-    } catch (error: any) {
-      if (axios.isAxiosError(error)) {
-        setAuthState({
-          data: null,
-          isSuccess: false,
-          isLoading: false,
-          isError: true,
-          error: error.response?.data.message,
+          isFetchingUserState: false,
         });
       } else {
-        setAuthState({
-          data: null,
-          isSuccess: false,
+        const response: AxiosResponse<User> = await axios.get<User>(
+          "http://localhost:3000/api/auth/me",
+          {
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
+          }
+        );
+
+        axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
+
+        updateAuthState({
+          userData: response.data,
+          isLoggedIn: true,
           isLoading: false,
-          isError: true,
-          error: error.message,
+          isFetchingUserState: false,
         });
       }
+    } catch (error: any) {
+      const errorMessage = axios.isAxiosError(error)
+        ? error.response?.data.message
+        : error.message;
+
+      updateAuthState({
+        isError: true,
+        isLoading: false,
+        isFetchingUserState: false,
+        errorData: errorMessage,
+      });
     }
   };
 
   useEffect(() => {
     fetchUser();
   }, []);
+
   return (
     <AuthenticationContext.Provider value={{ ...authState, setAuthState }}>
       {children}

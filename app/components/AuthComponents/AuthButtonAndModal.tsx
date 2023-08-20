@@ -34,23 +34,18 @@ export interface AuthButtonAndModalProps {
 const AuthButtonAndModal = ({
   type: authButtonAndModalType,
 }: AuthButtonAndModalProps): JSX.Element => {
+  const { isSignIn, isSignUp, isLoggedIn, isLoading, errorData } = useContext(
+    AuthenticationContext
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
-  const {
-    data: userData,
-    isSuccess: AuthSucceded,
-    isLoading,
-    error,
-  } = useContext(AuthenticationContext);
 
   useEffect(() => {
-    if (AuthSucceded) {
+    if (isSignIn || isSignUp || isLoggedIn) {
       handleClose();
     }
-  }, [AuthSucceded]);
-
-  useEffect(() => {}, [!isModalOpen]);
+  }, [isSignIn, isSignUp, isLoggedIn]);
 
   const commonAuthButtonStyles = `border p-1 px-4 rounded ${
     isLoading ? "cursor-not-allowed" : "cursor-pointer"
@@ -63,18 +58,13 @@ const AuthButtonAndModal = ({
           <button
             className={`${commonAuthButtonStyles} bg-blue-400 text-white mr-3`}
             onClick={handleOpen}
-            disabled={isLoading}
           >
             Sign in
           </button>
         );
       case AUTH_BUTTON_AND_MODAL_TYPE.SIGN_UP:
         return (
-          <button
-            className={`${commonAuthButtonStyles}`}
-            onClick={handleOpen}
-            disabled={isLoading}
-          >
+          <button className={`${commonAuthButtonStyles}`} onClick={handleOpen}>
             Sign up
           </button>
         );
@@ -83,7 +73,6 @@ const AuthButtonAndModal = ({
 
   return (
     <div>
-      {" "}
       {customAuthButton()}
       <Modal
         open={isModalOpen}
@@ -108,7 +97,7 @@ const AuthButtonAndModal = ({
               </h2>
               <AuthModalForm formType={authButtonAndModalType} />
             </div>
-            {error ? <Alert severity="error">{error}</Alert> : null}
+            {errorData ? <Alert severity="error">{errorData}</Alert> : null}
           </div>
         </Box>
       </Modal>

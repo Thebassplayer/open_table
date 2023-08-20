@@ -1,8 +1,14 @@
+// Schemas
 import signInFormSchema, { SignInFormValues } from "@/schemas/signIn.schema";
+// types
 import { NextApiRequest, NextApiResponse } from "next";
+// Prisma
 import { PrismaClient } from "@prisma/client";
+// bcrypt
 import bcrypt from "bcrypt";
+// jose
 import * as jose from "jose";
+// cookies-next
 import { setCookie } from "cookies-next";
 
 export interface SignInApiRequest extends NextApiRequest {

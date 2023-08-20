@@ -56,7 +56,7 @@ const AuthModalForm: React.FC<AuthModalFormProps> = ({ formType }) => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ errors, touched, isValid, dirty }) => (
+      {({ errors, touched, isValid, dirty, handleSubmit }) => (
         <Form>
           {!isSignIn && (
             <div className="my-3 flex justify-between text-sm">
@@ -142,7 +142,11 @@ const AuthModalForm: React.FC<AuthModalFormProps> = ({ formType }) => {
             </div>
           )}
 
-          <SignFormButton isValid={isValid} dirty={dirty} isSignIn={isSignIn} />
+          <SignFormButton
+            isValid={isValid}
+            dirty={dirty}
+            handleSubmit={handleSubmit}
+          />
         </Form>
       )}
     </Formik>

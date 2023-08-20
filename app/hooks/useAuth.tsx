@@ -4,50 +4,39 @@ import { AxiosResponse, AxiosError } from "axios";
 // Context
 import { useContext } from "react";
 import { AuthenticationContext } from "../context/AuthContext";
-import { getCookie } from "cookies-next";
-import { User } from "@prisma/client";
+import { SignInFormValues } from "@/schemas/signIn.schema";
+import { SignUpFormValues } from "@/schemas/signUp.schema";
+import { deleteCookie } from "cookies-next";
 
-interface ApiResponse {
-  id: number;
-  email: string;
-  first_name: string;
-  last_name: string;
-  phone: string;
-  city: string;
-}
+type SignInValues = Pick<SignInFormValues, "email" | "password">;
 
-interface SignInValues {
-  email: string;
-  password: string;
-}
-
-interface SignUpValues extends SignInValues {
-  first_name: string;
-  last_name: string;
-  phone: string;
-  city: string;
-}
+type SignUpValues = Pick<
+  SignUpFormValues,
+  "first_name" | "last_name" | "email" | "password" | "phone" | "city"
+>;
 
 interface AuthFunctions {
   signIn: (values: SignInValues) => Promise<void>;
   signUp: (values: SignUpValues) => Promise<void>;
+  signOut: () => void;
 }
 
 const useAuth = (): AuthFunctions => {
-  const { data, isLoading, error, setAuthState } = useContext(
-    AuthenticationContext
-  );
+  const { setAuthState, isLoggedIn } = useContext(AuthenticationContext);
   const signIn = async ({ email, password }: SignInValues): Promise<void> => {
     setAuthState({
       isLoading: true,
-      isSuccess: false,
+      isSignIn: false,
+      isSignUp: false,
+      isLoggedIn: false,
+      isFetchingUserState: false,
       isError: false,
-      data: null,
-      error: null,
+      userData: null,
+      errorData: null,
     });
 
     try {
-      const response: AxiosResponse<ApiResponse> = await axios.post(
+      const response: AxiosResponse<User> = await axios.post(
         "http://localhost:3000/api/auth/signin",
         {
           email,
@@ -56,27 +45,34 @@ const useAuth = (): AuthFunctions => {
       );
       setAuthState({
         isLoading: false,
-        isSuccess: true,
+        isSignIn: false,
+        isSignUp: false,
+        isLoggedIn: true,
         isError: false,
-        data: response.data,
-        error: null,
+        userData: response.data,
+        errorData: null,
       });
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
         setAuthState({
-          data: null,
-          isSuccess: false,
+          userData: null,
+          isSignIn: false,
+          isSignUp: false,
+          isLoggedIn: false,
           isLoading: false,
+          isFetchingUserState: false,
           isError: true,
-          error: error.response?.data.message,
+          errorData: error.response?.data.message,
         });
       } else {
         setAuthState({
-          data: null,
-          isSuccess: false,
+          userData: null,
+          isSignIn: false,
+          isSignUp: false,
+          isLoggedIn: false,
           isLoading: false,
           isError: true,
-          error: error.message,
+          errorData: error.message,
         });
       }
     }
@@ -90,16 +86,20 @@ const useAuth = (): AuthFunctions => {
     phone,
     city,
   }: SignUpValues): Promise<void> => {
+    if (isLoggedIn) return;
+
     setAuthState({
       isLoading: true,
-      isSuccess: false,
+      isSignUp: false,
+      isSignIn: false,
+      isLoggedIn: false,
       isError: false,
-      data: null,
-      error: null,
+      userData: null,
+      errorData: null,
     });
 
     try {
-      const response: AxiosResponse<ApiResponse> = await axios.post(
+      const response: AxiosResponse<User> = await axios.post(
         "http://localhost:3000/api/auth/signup",
         {
           email,
@@ -111,34 +111,53 @@ const useAuth = (): AuthFunctions => {
         }
       );
       setAuthState({
+        userData: response.data,
         isLoading: false,
-        isSuccess: true,
+        isSignUp: true,
+        isSignIn: false,
+        isLoggedIn: true,
         isError: false,
-        data: response.data,
-        error: null,
+        errorData: null,
       });
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
         setAuthState({
-          data: null,
-          isSuccess: false,
+          userData: null,
           isLoading: false,
+          isSignUp: false,
+          isSignIn: false,
+          isLoggedIn: false,
           isError: true,
-          error: error.response?.data.message,
+          errorData: error.response?.data.message,
         });
       } else {
         setAuthState({
-          data: null,
-          isSuccess: false,
+          userData: null,
           isLoading: false,
+          isSignUp: false,
+          isSignIn: false,
+          isLoggedIn: false,
           isError: true,
-          error: error.message,
+          errorData: error.message,
         });
       }
     }
   };
 
-  return { signIn, signUp };
+  const signOut = (): void => {
+    deleteCookie("jwt");
+    setAuthState({
+      userData: null,
+      isLoading: false,
+      isSignIn: false,
+      isSignUp: false,
+      isLoggedIn: false,
+      isError: false,
+      errorData: null,
+    });
+  };
+
+  return { signIn, signUp, signOut };
 };
 
 export default useAuth;
