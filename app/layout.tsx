@@ -8,8 +8,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Cafecitos",
-  description: "Find your next restaurant",
+  title: "CafecitosDeBarrio.com",
+  description: "Cafes de Especialidad en tu Barrio",
 };
 
 export default function RootLayout({

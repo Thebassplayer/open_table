@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Search | Cafecitos",
-  description: "Find your next restaurant",
+  title: "Search | CafecitosDeBarrio.com",
+  description: "Encuantra tu proximo cafe",
 };
 
 export default function SearchLayout({

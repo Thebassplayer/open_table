@@ -73,7 +73,7 @@ const AuthNavBarAndModal = ({
               <h2 className="text-2xl font-light text-center">
                 {authButtonAndModalType === AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN
                   ? "Log Into Your Account"
-                  : "Create Your Cafecitos Account"}
+                  : "Create Your CafecitosDeBarrio.com Account"}
               </h2>
               <AuthModalForm formType={authButtonAndModalType} />
             </div>

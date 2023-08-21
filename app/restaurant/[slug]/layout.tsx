@@ -3,8 +3,8 @@ import Header from "./components/Header";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Milestones Grill | Cafecitos",
-  description: "Find your next restaurant",
+  title: "Milestones Grill | CafecitosDeBarrio.com",
+  description: "Encuantra tu proximo cafe",
 };
 
 const RestaurantLayout = ({

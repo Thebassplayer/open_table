@@ -37,9 +37,10 @@ const Form = (): JSX.Element => {
         Complete reservation
       </button>
       <p className="mt-4 text-sm">
-        By clicking “Complete reservation” you agree to the Cafecitos Terms of
-        Use and Privacy Policy. Standard text message rates may apply. You may
-        opt out of receiving text messages at any time.
+        By clicking “Complete reservation” you agree to the
+        CafecitosDeBarrio.com Terms of Use and Privacy Policy. Standard text
+        message rates may apply. You may opt out of receiving text messages at
+        any time.
       </p>
     </div>
   );
