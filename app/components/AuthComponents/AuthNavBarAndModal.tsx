@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 // Components
 import AuthModalForm from "./AuthModalForm";
+import AuthNav from "./AuthNav";
 import { Alert } from "@mui/material";
 // Context
 import { AuthenticationContext } from "@/app/context/AuthContext";
@@ -21,19 +22,19 @@ const boxStyle = {
 };
 
 export const AUTH_BUTTON_AND_MODAL_TYPE = {
-  SIGN_IN: "signIn",
-  SIGN_UP: "signUp",
+  SIGN_IN: "SIGNIN",
+  SIGN_UP: "SINGUP",
 };
 
-export interface AuthButtonAndModalProps {
+export interface AuthNavBarAndModalProps {
   type:
     | typeof AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN
     | typeof AUTH_BUTTON_AND_MODAL_TYPE.SIGN_UP;
 }
 
-const AuthButtonAndModal = ({
+const AuthNavBarAndModal = ({
   type: authButtonAndModalType,
-}: AuthButtonAndModalProps): JSX.Element => {
+}: AuthNavBarAndModalProps): JSX.Element => {
   const { isSignIn, isSignUp, isLoggedIn, isLoading, errorData } = useContext(
     AuthenticationContext
   );
@@ -47,33 +48,12 @@ const AuthButtonAndModal = ({
     }
   }, [isSignIn, isSignUp, isLoggedIn]);
 
-  const commonAuthButtonStyles = `border p-1 px-4 rounded ${
-    isLoading ? "cursor-not-allowed" : "cursor-pointer"
-  }`;
-
-  const customAuthButton = () => {
-    switch (authButtonAndModalType) {
-      case AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN:
-        return (
-          <button
-            className={`${commonAuthButtonStyles} bg-blue-400 text-white mr-3`}
-            onClick={handleOpen}
-          >
-            Sign in
-          </button>
-        );
-      case AUTH_BUTTON_AND_MODAL_TYPE.SIGN_UP:
-        return (
-          <button className={`${commonAuthButtonStyles}`} onClick={handleOpen}>
-            Sign up
-          </button>
-        );
-    }
-  };
-
   return (
     <div>
-      {customAuthButton()}
+      <AuthNav
+        authButtonAndModalType={authButtonAndModalType}
+        handleOpen={handleOpen}
+      />
       <Modal
         open={isModalOpen}
         onClose={handleClose}
@@ -105,4 +85,4 @@ const AuthButtonAndModal = ({
   );
 };
 
-export default AuthButtonAndModal;
+export default AuthNavBarAndModal;

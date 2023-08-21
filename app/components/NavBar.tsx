@@ -2,9 +2,9 @@
 // Next
 import Link from "next/link";
 // Components
-import AuthButtonAndModal, {
+import AuthNavBarAndModal, {
   AUTH_BUTTON_AND_MODAL_TYPE,
-} from "./AuthComponents/AuthButtonAndModal";
+} from "./AuthComponents/AuthNavBarAndModal";
 import { useContext } from "react";
 import { AuthenticationContext } from "../context/AuthContext";
 import useAuth from "../hooks/useAuth";
@@ -30,8 +30,8 @@ const NavBar = (): JSX.Element => {
             </button>
           ) : (
             <>
-              <AuthButtonAndModal type={AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN} />
-              <AuthButtonAndModal type={AUTH_BUTTON_AND_MODAL_TYPE.SIGN_UP} />
+              <AuthNavBarAndModal type={AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN} />
+              <AuthNavBarAndModal type={AUTH_BUTTON_AND_MODAL_TYPE.SIGN_UP} />
             </>
           )}
         </div>

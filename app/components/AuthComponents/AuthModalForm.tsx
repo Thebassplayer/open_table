@@ -10,8 +10,8 @@ import signInFormSchema, {
   SignInFormValues,
 } from "../../../schemas/signIn.schema";
 // Components
-import FormikInputComponent from "./FormikInputComponent";
-import { AUTH_BUTTON_AND_MODAL_TYPE } from "./AuthButtonAndModal";
+import FormInputComponent from "./FormInputComponent";
+import { AUTH_BUTTON_AND_MODAL_TYPE } from "./AuthNavBarAndModal";
 import SignFormButton from "./SignFormButton";
 // Hooks
 import useAuth from "@/app/hooks/useAuth";
@@ -23,26 +23,41 @@ interface AuthModalFormProps {
 }
 
 const AuthModalForm: React.FC<AuthModalFormProps> = ({ formType }) => {
+  if (!formType) return null;
+
   const { signIn, signUp } = useAuth();
-  const isSignIn = formType === AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN;
 
-  const initialValues = isSignIn
-    ? { email: "", password: "" }
-    : {
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone: "",
-        city: "",
-        password: "",
-      };
+  const getInitialValues = () => {
+    switch (formType) {
+      case AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN:
+        return { email: "", password: "" } as SignInFormValues;
+      case AUTH_BUTTON_AND_MODAL_TYPE.SIGN_UP:
+        return {
+          first_name: "",
+          last_name: "",
+          email: "",
+          phone: "",
+          city: "",
+          password: "",
+        } as SignUpFormValues;
+      default:
+        return {} as SignUpFormValues;
+    }
+  };
 
-  const validationSchema = isSignIn
-    ? toFormikValidationSchema(signInFormSchema)
-    : toFormikValidationSchema(signUpFormSchema);
+  const validationSchema = () => {
+    switch (formType) {
+      case AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN:
+        return toFormikValidationSchema(signInFormSchema);
+      case AUTH_BUTTON_AND_MODAL_TYPE.SIGN_UP:
+        return toFormikValidationSchema(signUpFormSchema);
+      default:
+        return {};
+    }
+  };
 
   const handleSubmit = async (values: SignInFormValues | SignUpFormValues) => {
-    if (isSignIn) {
+    if (formType === AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN) {
       signIn(values as SignInFormValues);
     } else {
       const { confirm_password, ...signUpValues } = values as SignUpFormValues;
@@ -52,37 +67,60 @@ const AuthModalForm: React.FC<AuthModalFormProps> = ({ formType }) => {
 
   return (
     <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
+      initialValues={getInitialValues()}
+      validationSchema={validationSchema()}
       onSubmit={handleSubmit}
     >
       {({ errors, touched, isValid, dirty, handleSubmit }) => (
         <Form>
-          {!isSignIn && (
-            <div className="my-3 flex justify-between text-sm">
-              <FormikInputComponent
-                name="first_name"
-                className="w-[49%]"
-                type="text"
-                placeholder="First Name"
-                errors={errors}
-                touched={touched}
-                tooltipPlacement="left"
-              />
-              <FormikInputComponent
-                name="last_name"
-                className="w-[49%]"
-                type="text"
-                placeholder="Last Name"
-                errors={errors}
-                touched={touched}
-                tooltipPlacement="right"
-              />
-            </div>
+          {formType === AUTH_BUTTON_AND_MODAL_TYPE.SIGN_UP && (
+            <>
+              <div className="my-3 flex justify-between text-sm">
+                <FormInputComponent
+                  name="first_name"
+                  className="w-[49%]"
+                  type="text"
+                  placeholder="First Name"
+                  errors={errors}
+                  touched={touched}
+                  tooltipPlacement="left"
+                />
+                <FormInputComponent
+                  name="last_name"
+                  className="w-[49%]"
+                  type="text"
+                  placeholder="Last Name"
+                  errors={errors}
+                  touched={touched}
+                  tooltipPlacement="right"
+                />
+              </div>
+
+              <div className="my-3 flex justify-between text-sm">
+                <FormInputComponent
+                  name="phone"
+                  className="w-[49%]"
+                  type="text"
+                  placeholder="Phone"
+                  errors={errors}
+                  touched={touched}
+                  tooltipPlacement="left"
+                />
+                <FormInputComponent
+                  name="city"
+                  className="w-[49%]"
+                  type="text"
+                  placeholder="City"
+                  errors={errors}
+                  touched={touched}
+                  tooltipPlacement="right"
+                />
+              </div>
+            </>
           )}
 
           <div className="my-3 flex justify-between text-sm">
-            <FormikInputComponent
+            <FormInputComponent
               name="email"
               className="w-full"
               type="email"
@@ -93,31 +131,8 @@ const AuthModalForm: React.FC<AuthModalFormProps> = ({ formType }) => {
             />
           </div>
 
-          {!isSignIn && (
-            <div className="my-3 flex justify-between text-sm">
-              <FormikInputComponent
-                name="phone"
-                className="w-[49%]"
-                type="text"
-                placeholder="Phone"
-                errors={errors}
-                touched={touched}
-                tooltipPlacement="left"
-              />
-              <FormikInputComponent
-                name="city"
-                className="w-[49%]"
-                type="text"
-                placeholder="City"
-                errors={errors}
-                touched={touched}
-                tooltipPlacement="right"
-              />
-            </div>
-          )}
-
           <div className="my-3 flex justify-between text-sm">
-            <FormikInputComponent
+            <FormInputComponent
               name="password"
               className="w-full"
               type="password"
@@ -128,9 +143,9 @@ const AuthModalForm: React.FC<AuthModalFormProps> = ({ formType }) => {
             />
           </div>
 
-          {!isSignIn && (
+          {formType === AUTH_BUTTON_AND_MODAL_TYPE.SIGN_UP && (
             <div className="my-3 flex justify-between text-sm">
-              <FormikInputComponent
+              <FormInputComponent
                 name="confirm_password"
                 className="w-full"
                 type="password"

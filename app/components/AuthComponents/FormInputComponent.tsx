@@ -1,7 +1,7 @@
 import { Field } from "formik";
 import { Tooltip } from "react-tooltip";
 
-interface FormikInputComponentProps {
+interface FormInputComponentProps {
   name: string;
   className?: string;
   type: string;
@@ -11,7 +11,7 @@ interface FormikInputComponentProps {
   tooltipPlacement?: "left" | "right";
 }
 
-const FormikInputComponent = ({
+const FormInputComponent = ({
   name,
   className,
   type,
@@ -19,10 +19,10 @@ const FormikInputComponent = ({
   errors,
   touched,
   tooltipPlacement,
-}: FormikInputComponentProps): JSX.Element => {
-  const InputBorderColor = () => {
+}: FormInputComponentProps): JSX.Element => {
+  const ValidationStyles = () => {
     if (errors[name] && touched[name]) {
-      return "border-red-500";
+      return "border-red-500 text-red-500";
     } else if (!errors[name] && touched[name]) {
       return "border-green-500";
     } else {
@@ -37,7 +37,7 @@ const FormikInputComponent = ({
       >
         <Field
           name={name}
-          className={`border rounded px-2 py-3 w-full ${InputBorderColor()}`}
+          className={`border rounded px-2 py-3 w-full ${ValidationStyles()}`}
           type={type}
           placeholder={placeholder}
         />
@@ -55,4 +55,4 @@ const FormikInputComponent = ({
   );
 };
 
-export default FormikInputComponent;
+export default FormInputComponent;
