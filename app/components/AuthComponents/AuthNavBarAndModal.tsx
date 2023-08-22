@@ -9,6 +9,8 @@ import AuthNav from "./AuthNav";
 import { Alert } from "@mui/material";
 // Context
 import { AuthenticationContext } from "@/app/context/AuthContext";
+// Constants
+import { AUTH_BUTTON_AND_MODAL_TYPE } from "./constants";
 
 const boxStyle = {
   position: "absolute" as "absolute",
@@ -21,11 +23,6 @@ const boxStyle = {
   p: 4,
 };
 
-export const AUTH_BUTTON_AND_MODAL_TYPE = {
-  SIGN_IN: "SIGNIN",
-  SIGN_UP: "SINGUP",
-};
-
 export interface AuthNavBarAndModalProps {
   type:
     | typeof AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN
@@ -35,7 +32,7 @@ export interface AuthNavBarAndModalProps {
 const AuthNavBarAndModal = ({
   type: authButtonAndModalType,
 }: AuthNavBarAndModalProps): JSX.Element => {
-  const { isSignIn, isSignUp, isLoggedIn, isLoading, errorData } = useContext(
+  const { isSignIn, isSignUp, isLoggedIn, errorData } = useContext(
     AuthenticationContext
   );
   const [isModalOpen, setIsModalOpen] = useState(false);

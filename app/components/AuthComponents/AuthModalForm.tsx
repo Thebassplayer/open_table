@@ -11,7 +11,7 @@ import signInFormSchema, {
 } from "../../../schemas/signIn.schema";
 // Components
 import FormInputComponent from "./FormInputComponent";
-import { AUTH_BUTTON_AND_MODAL_TYPE } from "./AuthNavBarAndModal";
+import { AUTH_BUTTON_AND_MODAL_TYPE } from "./constants";
 import SignFormButton from "./SignFormButton";
 // Hooks
 import useAuth from "@/app/hooks/useAuth";

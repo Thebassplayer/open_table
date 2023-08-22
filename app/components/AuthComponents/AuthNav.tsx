@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AUTH_BUTTON_AND_MODAL_TYPE } from "./AuthNavBarAndModal";
+import { AUTH_BUTTON_AND_MODAL_TYPE } from "./constants";
 import { AuthenticationContext } from "@/app/context/AuthContext";
 
 interface AuthNavProps {
