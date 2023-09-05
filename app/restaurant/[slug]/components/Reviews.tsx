@@ -6,7 +6,6 @@ interface ReviewsProps {
 }
 
 const Reviews = ({ reviews }: ReviewsProps): JSX.Element => {
-  console.log(reviews);
   const numberOfReviews = reviews.length;
   return !numberOfReviews ? (
     <div>
