@@ -1,17 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthenticationContext } from "@/app/context/AuthContext";
 import { CircularProgress } from "@mui/material";
+import { FormType } from "./AuthModalForm";
+import { AUTH_BUTTON_AND_MODAL_TYPE } from "../../constants";
 
 interface SignFormButtonProps {
   isValid: boolean;
   dirty: boolean;
   handleSubmit: () => void;
+  formType: FormType;
 }
 
 const SignFormButton = ({
   isValid,
   dirty,
   handleSubmit,
+  formType,
 }: SignFormButtonProps): JSX.Element => {
   const [isDisabled, setIsDisabled] = useState(false);
   const { isLoggedIn, isSignIn, isSignUp, isLoading } = useContext(
@@ -47,7 +51,7 @@ const SignFormButton = ({
       <span className="flex items-center justify-center">
         {isLoading ? (
           <CircularProgress color="primary" size={20} />
-        ) : isSignIn ? (
+        ) : formType === AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN ? (
           "Sign In"
         ) : (
           "Create Account"

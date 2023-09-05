@@ -10,7 +10,7 @@ import { Alert } from "@mui/material";
 // Context
 import { AuthenticationContext } from "@/app/context/AuthContext";
 // Constants
-import { AUTH_BUTTON_AND_MODAL_TYPE } from "./constants";
+import { AUTH_BUTTON_AND_MODAL_TYPE } from "../../constants";
 
 const boxStyle = {
   position: "absolute" as "absolute",
@@ -35,6 +35,7 @@ const AuthNavBarAndModal = ({
   const { isSignIn, isSignUp, isLoggedIn, errorData } = useContext(
     AuthenticationContext
   );
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
@@ -58,7 +59,7 @@ const AuthNavBarAndModal = ({
         aria-describedby="modal-modal-description"
       >
         <Box sx={boxStyle}>
-          <div className="p-2 h-[600px]">
+          <div className="p-2 h-[650px]">
             <div className="uppercase font-bold text-center pb-2 mb-2">
               <p className="text-sm">
                 {authButtonAndModalType === AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN

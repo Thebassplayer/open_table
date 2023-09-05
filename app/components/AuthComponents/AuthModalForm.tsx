@@ -11,15 +11,17 @@ import signInFormSchema, {
 } from "../../../schemas/signIn.schema";
 // Components
 import FormInputComponent from "./FormInputComponent";
-import { AUTH_BUTTON_AND_MODAL_TYPE } from "./constants";
+import { AUTH_BUTTON_AND_MODAL_TYPE } from "../../constants";
 import SignFormButton from "./SignFormButton";
 // Hooks
 import useAuth from "@/app/hooks/useAuth";
 
+export type FormType =
+  | typeof AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN
+  | typeof AUTH_BUTTON_AND_MODAL_TYPE.SIGN_UP;
+
 interface AuthModalFormProps {
-  formType:
-    | typeof AUTH_BUTTON_AND_MODAL_TYPE.SIGN_IN
-    | typeof AUTH_BUTTON_AND_MODAL_TYPE.SIGN_UP;
+  formType: FormType;
 }
 
 const AuthModalForm: React.FC<AuthModalFormProps> = ({ formType }) => {
@@ -158,6 +160,7 @@ const AuthModalForm: React.FC<AuthModalFormProps> = ({ formType }) => {
           )}
 
           <SignFormButton
+            formType={formType}
             isValid={isValid}
             dirty={dirty}
             handleSubmit={handleSubmit}

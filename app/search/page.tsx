@@ -1,6 +1,4 @@
-{
-}
-import React from "react";
+
 // Components
 import Headers from "@/app/search/components/Headers";
 import SearchSideBar from "@/app/search/components/SearchSideBar";

@@ -3,7 +3,7 @@
 import Link from "next/link";
 // Components
 import AuthNavBarAndModal from "./AuthComponents/AuthNavBarAndModal";
-import { AUTH_BUTTON_AND_MODAL_TYPE } from "./AuthComponents/constants";
+import { AUTH_BUTTON_AND_MODAL_TYPE } from "../constants";
 import { useContext } from "react";
 import { AuthenticationContext } from "../context/AuthContext";
 import useAuth from "../hooks/useAuth";

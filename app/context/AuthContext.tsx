@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, createContext, useEffect } from "react";
+import { useState, createContext, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
 import { getCookie } from "cookies-next";
 import { AuthContextProps, AuthState } from "@/types/auth";
@@ -29,7 +29,6 @@ const AuthContext: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   };
 
   const [authState, setAuthState] = useState<AuthState>(initialAuthState);
-  console.log("isLoggedIn: ", authState.isLoggedIn);
 
   const updateAuthState = (newState: Partial<AuthState>): void => {
     setAuthState(prevState => ({
@@ -64,10 +63,12 @@ const AuthContext: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           isLoggedIn: true,
           isLoading: false,
           isFetchingUserState: false,
+          isError: false, // Reset the error state on success
+          errorData: null, // Clear the error data on success
         });
       }
     } catch (error: any) {
-      const errorMessage = axios.isAxiosError(error)
+      let errorMessage = axios.isAxiosError(error)
         ? error.response?.data.message
         : error.message;
 
@@ -83,6 +84,16 @@ const AuthContext: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   useEffect(() => {
     fetchUser();
   }, []);
+
+  useEffect(() => {
+    const clearError = setTimeout(() => {
+      updateAuthState({
+        isError: false, // Clear the error state after 3 seconds
+        errorData: null, // Clear the error data after 3 seconds
+      });
+    }, 3000);
+    return () => clearTimeout(clearError);
+  }, [authState.isError]);
 
   return (
     <AuthenticationContext.Provider value={{ ...authState, setAuthState }}>
