@@ -46,6 +46,7 @@ const SearchSideBar = ({
                 pathname: "/search",
                 query: { ...searchParams, location: name },
               }}
+              key={id}
             >
               <p key={id} className="font-light text-reg capitalize">
                 {name}
@@ -64,6 +65,7 @@ const SearchSideBar = ({
                 pathname: "/search",
                 query: { ...searchParams, cuisine: name },
               }}
+              key={id}
             >
               <p key={id} className="font-light text-reg capitalize">
                 {name}

@@ -19,8 +19,8 @@ const Reviews = ({ reviews }: ReviewsProps): JSX.Element => {
         What {numberOfReviews}{" "}
         {numberOfReviews === 1 ? "person is" : "people are"} saying
       </h1>
-      {reviews.map(review => {
-        return <ReviewCard review={review} />;
+      {reviews.map((review, index) => {
+        return <ReviewCard review={review} key={index} />;
       })}
     </div>
   );
