@@ -11,7 +11,7 @@
   "dependencies": {
     "@mui/material": "^5.14.4",
     "@mui/x-date-pickers": "^6.12.1",
-    "@prisma/client": "^5.1.0",
+    "@prisma/client": "^5.3.0",
     "@types/bcrypt": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "20.4.4",
@@ -43,6 +43,6 @@
     "zod-formik-adapter": "^1.2.0"
   },
   "devDependencies": {
-    "prisma": "^5.1.0"
+    "prisma": "^5.3.0"
   }
 }
