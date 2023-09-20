@@ -9,6 +9,7 @@ import bcrypt from "bcrypt";
 import * as jose from "jose";
 // Zod
 import signUpFormSchema, { SignUpFormValues } from "@/schemas/signUp.schema";
+import { fromZodError } from "zod-validation-error";
 
 export interface SignUpApiRequest extends NextApiRequest {
   body: SignUpFormValues;
@@ -22,6 +23,19 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const { email, password } = req.body;
+
+    // Validate data with Zod
+    // const errors: string[] = [];
+    // try {
+    //   const inputs = req.body;
+    //   signUpFormSchema.parse(inputs);
+    // } catch (err: any) {
+    //   const validationError = fromZodError(err);
+    //   validationError.details.forEach(detail => {
+    //     errors.push(detail.message);
+    //   });
+    //   return res.status(400).json({ message: errors });
+    // }
 
     const userWithEmail = await prisma.user.findUnique({
       where: {
