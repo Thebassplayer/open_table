@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "./components/Header";
-import Form from "./components/Form";
+import ConfirmReserveForm from "./components/ConfirmReserveForm";
 import { PrismaClient } from "@prisma/client";
-import { notFound, useSearchParams } from "next/navigation";
+import { notFound } from "next/navigation";
 
 const prisma = new PrismaClient();
 
@@ -32,7 +32,7 @@ const Reservation = async ({
     partySize: string;
   };
 }) => {
-  const restaurant = await fetchRestaurantBySlug(params.slug);
+  const restaurant = await fetchRestaurantBySlug(params?.slug);
 
   const { main_image, name } = restaurant;
   const { date, partySize } = searchParams;
@@ -46,7 +46,11 @@ const Reservation = async ({
           date={date}
           partySize={partySize}
         />
-        <Form />
+        <ConfirmReserveForm
+          date={date}
+          partySize={partySize}
+          slug={params.slug}
+        />
       </div>
     </div>
   );

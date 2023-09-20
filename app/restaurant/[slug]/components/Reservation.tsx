@@ -125,11 +125,12 @@ const Reservation = ({
         <div className="mt-5">
           <p className="text-reg">Select a Time</p>
           <div className="flex flex-wrap mt-2">
-            {data.map(time => {
+            {data.map((time, index) => {
               return time.available ? (
                 <Link
                   href={`/reserve/${slug}?date=${day}T${time.time}&partySize=${partySize}`}
                   className="bg-red-600 cursor-pointer p-2 w-24 text-center text-white mb-3 rounded mr-3"
+                  key={`${time.time}-${index}`}
                 >
                   <p className="text-sm font-bold">
                     {convertToDisplayTime(time.time as Time)}
