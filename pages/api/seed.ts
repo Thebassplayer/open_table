@@ -12,13 +12,13 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   // Delet all data
-  await prisma.table.deleteMany();
-  await prisma.review.deleteMany();
-  await prisma.item.deleteMany();
-  await prisma.restaurant.deleteMany();
-  await prisma.location.deleteMany();
-  await prisma.cuisine.deleteMany();
-  await prisma.user.deleteMany();
+  // await prisma.table.deleteMany();
+  // await prisma.review.deleteMany();
+  // await prisma.item.deleteMany();
+  // await prisma.restaurant.deleteMany();
+  // await prisma.location.deleteMany();
+  // await prisma.cuisine.deleteMany();
+  // await prisma.user.deleteMany();
 
   // Create Cities
   await prisma.location.createMany({
@@ -1307,22 +1307,67 @@ export default async function handler(
     ],
   });
 
+  function generateRestaurantData(
+    restaurantIds: number[]
+  ): { restaurant_id: number; seats: number }[] {
+    const restaurantData: { restaurant_id: number; seats: number }[] = [];
+
+    for (const restaurant_id of restaurantIds) {
+      // Generate a random number of tables between 4 and 20 for each restaurant
+      const numTables = Math.floor(Math.random() * 20) + 4;
+
+      for (let i = 0; i < numTables; i++) {
+        // Generate a random number of seats for each table (either 2 or 4)
+        const seats = Math.random() < 0.5 ? 2 : 4;
+
+        restaurantData.push({ restaurant_id, seats });
+      }
+    }
+
+    return restaurantData;
+  }
+
+  // Example usage:
+  const restaurantIds = [
+    vivaanId,
+    RamaKrishnaId,
+    coconutLagoonId,
+    lastTrainToDelhiId,
+    adrakYorkvilleId,
+    curryishTavernId,
+    utsavId,
+    pukkaId,
+    kamasutraIndianId,
+    eldoradoTacoId,
+    laBartolaId,
+    elCatrinId,
+    mariachisId,
+    canoRestaurantId,
+    bluRistoranteId,
+    stelvioId,
+    sofiaId,
+  ];
+
+  const generatedData = generateRestaurantData(restaurantIds);
+
   await prisma.table.createMany({
-    data: [
-      {
-        restaurant_id: vivaanId,
-        seats: 4,
-      },
-      {
-        restaurant_id: vivaanId,
-        seats: 4,
-      },
-      {
-        restaurant_id: vivaanId,
-        seats: 2,
-      },
-    ],
+    data: generatedData,
+
+    // [
+    //   {
+    //     restaurant_id: vivaanId,
+    //     seats: 4,
+    //   },
+    //   {
+    //     restaurant_id: vivaanId,
+    //     seats: 4,
+    //   },
+    //   {
+    //     restaurant_id: vivaanId,
+    //     seats: 2,
+    //   },
+    // ],
   });
 
-  res.status(200).json({ name: "hello" });
+  res.status(200).json({ name: "Seeds Created" });
 }
