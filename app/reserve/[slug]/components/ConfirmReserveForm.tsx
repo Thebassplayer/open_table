@@ -19,7 +19,7 @@ const ConfirmReserveForm = ({
   date,
 }: ConfirmReserveFormProps): JSX.Element => {
   const [day, time] = date.split("T");
-  const [didBook, setDidBook] = useState(false);
+  const [bookingSuccess, setBookingSuccess] = useState(false);
   const initialValues: ReserveFormValues = {
     bookerFirstName: "",
     bookerLastName: "",
@@ -42,7 +42,7 @@ const ConfirmReserveForm = ({
           day,
           time,
           ...values,
-          setDidBook,
+          setBookingSuccess,
         });
         console.log(reservation);
       }}
@@ -57,6 +57,7 @@ const ConfirmReserveForm = ({
               errors={errors}
               touched={touched}
               tooltipPlacement="left"
+              disabled={bookingSuccess}
             />
             <FormInputComponent
               name="bookerLastName"
@@ -65,6 +66,7 @@ const ConfirmReserveForm = ({
               errors={errors}
               touched={touched}
               tooltipPlacement="right"
+              disabled={bookingSuccess}
             />
             <FormInputComponent
               name="bookerPhone"
@@ -73,6 +75,7 @@ const ConfirmReserveForm = ({
               errors={errors}
               touched={touched}
               tooltipPlacement="left"
+              disabled={bookingSuccess}
             />
             <FormInputComponent
               name="bookerEmail"
@@ -81,6 +84,7 @@ const ConfirmReserveForm = ({
               errors={errors}
               touched={touched}
               tooltipPlacement="right"
+              disabled={bookingSuccess}
             />
             <FormInputComponent
               name="bookerOccasion"
@@ -89,6 +93,7 @@ const ConfirmReserveForm = ({
               errors={errors}
               touched={touched}
               tooltipPlacement="right"
+              disabled={bookingSuccess}
             />
             <FormInputComponent
               name="bookerRequest"
@@ -97,11 +102,12 @@ const ConfirmReserveForm = ({
               errors={errors}
               touched={touched}
               tooltipPlacement="right"
+              disabled={bookingSuccess}
             />
           </div>
-          {didBook ? (
+          {bookingSuccess ? (
             <button
-              disabled={didBook}
+              disabled={bookingSuccess}
               className="bg-green-600 w-full p-3 text-white font-bold rounded"
             >
               Your reservation was successful!

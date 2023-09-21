@@ -9,6 +9,7 @@ interface FormInputComponentProps {
   errors: { [key: string]: string };
   touched: { [key: string]: boolean };
   tooltipPlacement?: "left" | "right";
+  disabled?: boolean;
 }
 
 const FormInputComponent = ({
@@ -19,6 +20,7 @@ const FormInputComponent = ({
   errors,
   touched,
   tooltipPlacement,
+  disabled = false,
 }: FormInputComponentProps): JSX.Element => {
   const ValidationStyles = () => {
     if (errors[name] && touched[name]) {
@@ -40,6 +42,7 @@ const FormInputComponent = ({
           className={`border rounded px-2 py-3 w-full ${ValidationStyles()}`}
           type={type}
           placeholder={placeholder}
+          disabled={disabled}
         />
       </div>
       {errors[name] && touched[name] ? (

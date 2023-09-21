@@ -12,7 +12,7 @@ interface useReservationProps {
   bookerEmail: string;
   bookerOccasion?: string;
   bookerRequest?: string;
-  setDidBook: React.Dispatch<React.SetStateAction<boolean>>;
+  setBookingSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const useReservation = () => {
@@ -30,7 +30,7 @@ const useReservation = () => {
     bookerEmail,
     bookerOccasion,
     bookerRequest,
-    setDidBook,
+    setBookingSuccess,
   }: useReservationProps) => {
     setLoading(true);
     try {
@@ -54,7 +54,7 @@ const useReservation = () => {
       );
 
       setLoading(false);
-      setDidBook(true);
+      setBookingSuccess(true);
       return response.data;
     } catch (error: any) {
       setLoading(false);
