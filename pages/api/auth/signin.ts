@@ -1,5 +1,5 @@
 // Schemas
-import signInFormSchema, { SignInFormValues } from "@/schemas/signIn.schema";
+import signInFormSchema, { SignInFormValues } from "@/schemas/signin.schema";
 // types
 import { NextApiRequest, NextApiResponse } from "next";
 // Prisma
