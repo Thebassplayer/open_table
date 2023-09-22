@@ -8,7 +8,7 @@ import bcrypt from "bcrypt";
 // Jose
 import * as jose from "jose";
 // Zod
-import signUpFormSchema, { SignUpFormValues } from "@/schemas/signUp.schema";
+import signUpFormSchema, { SignUpFormValues } from "@/schemas/signup.schema";
 import { fromZodError } from "zod-validation-error";
 
 export interface SignUpApiRequest extends NextApiRequest {

@@ -4,8 +4,8 @@ import { AxiosResponse, AxiosError } from "axios";
 // Context
 import { useContext } from "react";
 import { AuthenticationContext } from "../context/AuthContext";
-import { SignInFormValues } from "@/schemas/signIn.schema";
-import { SignUpFormValues } from "@/schemas/signUp.schema";
+import { SignInFormValues } from "@/schemas/signin.schema";
+import { SignUpFormValues } from "@/schemas/signup.schema";
 import { deleteCookie } from "cookies-next";
 
 type SignInValues = Pick<SignInFormValues, "email" | "password">;

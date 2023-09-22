@@ -5,10 +5,10 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 // Schemas
 import signUpFormSchema, {
   SignUpFormValues,
-} from "../../../schemas/signUp.schema";
+} from "../../../schemas/signup.schema";
 import signInFormSchema, {
   SignInFormValues,
-} from "../../../schemas/signIn.schema";
+} from "../../../schemas/signin.schema";
 // Components
 import FormInputComponent from "./FormInputComponent";
 import { AUTH_BUTTON_AND_MODAL_TYPE } from "../../constants";

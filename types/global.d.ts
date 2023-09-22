@@ -1,4 +1,4 @@
-import SignUpFormValues from "./schemas/signUp.schema";
+import SignUpFormValues from "./schemas/signup.schema";
 
 export {};
 
