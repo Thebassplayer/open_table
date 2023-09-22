@@ -3,8 +3,8 @@
 import { Formik, Form } from "formik";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 // Schemas
-import signUpFormSchema, { SignUpFormValues } from "@/schemas/signup.schema";
-import signInFormSchema, { SignInFormValues } from "@/schemas/signin.schema";
+import signUpFormSchema, { SignUpFormValues } from "@/schemas/signup";
+import signInFormSchema, { SignInFormValues } from "@/schemas/signin";
 // Components
 import FormInputComponent from "./FormInputComponent";
 import { AUTH_BUTTON_AND_MODAL_TYPE } from "../../constants";
